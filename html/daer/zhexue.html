@@ -1,0 +1,655 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; position: relative; }
+#write svg h1, #write svg h2, #write svg h3, #write svg h4, #write svg h5, #write svg h6, #write svg p { position: static; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.mermaid-svg { margin: auto; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left: 0.25em solid rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    pre {
+        page-break-inside: avoid;
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.mac-os #write{
+    caret-color: AccentColor;
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+
+</style><title>哲学</title>
+</head>
+<body class='typora-export os-windows typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
+<div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#本体论">本体论</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#各大哲学家所认为的世界的本质">各大哲学家所认为的世界的本质</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#方法论基础普遍怀疑与我思">方法论基础：普遍怀疑与“我思”</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#认识论理性主义与天赋观念">认识论：理性主义与天赋观念</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#西方认识论发展脉络">西方认识论发展脉络</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#经验论培根→霍布斯→洛克→休谟">经验论（培根→霍布斯→洛克→休谟）</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#唯理论笛卡尔→斯宾诺莎">唯理论（笛卡尔→斯宾诺莎）</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#认识论革命的关键转折">认识论革命的关键转折</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#马克思的实践转向">马克思的实践转向</a></div><ul class="outline-children"></ul></li></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#道德论功利主义">道德论、功利主义</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一核心原则与哲学基础">一、核心原则与哲学基础</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#二主要流派与发展">二、主要流派与发展</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#古典功利主义">古典功利主义</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#康德的义务论">康德的义务论</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h5"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一哲学根基理性与自由">一、哲学根基：理性与自由</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h5"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#二核心原则定言命令categorical-imperative">二、核心原则：定言命令（Categorical Imperative）</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h5"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#三道德价值的源泉善良意志">三、道德价值的源泉：善良意志</a></div><ul class="outline-children"></ul></li></ul></li></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#康德"><strong>康德</strong></a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#1-哥白尼式革命主体中心性"><strong>1. “哥白尼式革命”：主体中心性</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2-知识的构成经验材料--先天形式"><strong>2. 知识的构成：经验材料 + 先天形式</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#3-先天综合判断知识的普遍必然性如何可能"><strong>3. 先天综合判断：知识的普遍必然性如何可能？</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#4-感性接受性与先天直观形式"><strong>4. 感性：接受性与先天直观形式</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#5-知性自发性与先天范畴"><strong>5. 知性：自发性与先天范畴</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#6-理性追求无条件者与理念"><strong>6. 理性：追求无条件者与理念</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#7现象与物自体认识界限的划界"><strong>7.现象与物自体：认识界限的划界</strong></a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#休谟">休谟</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一认识论基础经验主义与观念理论"><strong>一、认识论基础：经验主义与观念理论</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#二对因果关系的颠覆性批判"><strong>二、对因果关系的颠覆性批判</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#三对实体与自我的怀疑"><strong>三、对实体与自我的怀疑</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#温和怀疑论mitigated-skepticism的实践立场"><strong>温和怀疑论（Mitigated Skepticism）的实践立场</strong></a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#霍布斯">霍布斯</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一本体论与认识论机械唯物主义"><strong>一、本体论与认识论：机械唯物主义</strong></a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#马克思"><strong>马克思</strong></a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一对传统认识论的批判脱离实践的思辨是虚幻的"><strong>一、对传统认识论的批判：脱离实践的思辨是虚幻的</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#二实践的内涵人类改造世界的物质活动"><strong>二、实践的内涵：人类改造世界的物质活动</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#三实践与认识的辩证关系"><strong>三、实践与认识的辩证关系</strong></a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#1-实践是认识的来源和动力"><strong>1. 实践是认识的来源和动力</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2-实践是检验真理的唯一标准"><strong>2. 实践是检验真理的唯一标准</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#3-认识对实践的能动反作用"><strong>3. 认识对实践的能动反作用</strong></a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#三认识的发展规律实践→认识→再实践→再认识"><strong>三、认识的发展规律：实践→认识→再实践→再认识</strong></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#五阶级实践与意识形态批判"><strong>五、阶级实践与意识形态批判</strong></a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#笛卡尔">笛卡尔</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一方法论基础普遍怀疑与我思"><strong>一、方法论基础：普遍怀疑与“我思”</strong></a></div><ul class="outline-children"></ul></li></ul></li></div></div><div id='write'  class=''><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n286"><a class="md-toc-inner" href="#本体论">本体论</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n17"><a class="md-toc-inner" href="#各大哲学家所认为的世界的本质">各大哲学家所认为的世界的本质</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n33"><a class="md-toc-inner" href="#方法论基础普遍怀疑与我思">方法论基础：普遍怀疑与“我思”</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n40"><a class="md-toc-inner" href="#认识论理性主义与天赋观念">认识论：理性主义与天赋观念</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n46"><a class="md-toc-inner" href="#西方认识论发展脉络">西方认识论发展脉络</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n6"><a class="md-toc-inner" href="#经验论培根→霍布斯→洛克→休谟">经验论（培根→霍布斯→洛克→休谟）</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n8"><a class="md-toc-inner" href="#唯理论笛卡尔→斯宾诺莎">唯理论（笛卡尔→斯宾诺莎）</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n10"><a class="md-toc-inner" href="#认识论革命的关键转折">认识论革命的关键转折</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n106"><a class="md-toc-inner" href="#马克思的实践转向">马克思的实践转向</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n108"><a class="md-toc-inner" href="#道德论功利主义">道德论、功利主义</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n110"><a class="md-toc-inner" href="#一核心原则与哲学基础">一、核心原则与哲学基础</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n113"><a class="md-toc-inner" href="#二主要流派与发展">二、主要流派与发展</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n12"><a class="md-toc-inner" href="#古典功利主义">古典功利主义</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n115"><a class="md-toc-inner" href="#康德的义务论">康德的义务论</a></span><span role="listitem" class="md-toc-item md-toc-h5" data-ref="n120"><a class="md-toc-inner" href="#一哲学根基理性与自由">一、哲学根基：理性与自由</a></span><span role="listitem" class="md-toc-item md-toc-h5" data-ref="n122"><a class="md-toc-inner" href="#二核心原则定言命令categorical-imperative">二、核心原则：定言命令（Categorical Imperative）</a></span><span role="listitem" class="md-toc-item md-toc-h5" data-ref="n124"><a class="md-toc-inner" href="#三道德价值的源泉善良意志">三、道德价值的源泉：善良意志</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n149"><a class="md-toc-inner" href="#康德"><strong>康德</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n150"><a class="md-toc-inner" href="#1-哥白尼式革命主体中心性"><strong>1. “哥白尼式革命”：主体中心性</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n154"><a class="md-toc-inner" href="#2-知识的构成经验材料--先天形式"><strong>2. 知识的构成：经验材料 + 先天形式</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n158"><a class="md-toc-inner" href="#3-先天综合判断知识的普遍必然性如何可能"><strong>3. 先天综合判断：知识的普遍必然性如何可能？</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n163"><a class="md-toc-inner" href="#4-感性接受性与先天直观形式"><strong>4. 感性：接受性与先天直观形式</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n168"><a class="md-toc-inner" href="#5-知性自发性与先天范畴"><strong>5. 知性：自发性与先天范畴</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n175"><a class="md-toc-inner" href="#6-理性追求无条件者与理念"><strong>6. 理性：追求无条件者与理念</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n179"><a class="md-toc-inner" href="#7现象与物自体认识界限的划界"><strong>7.现象与物自体：认识界限的划界</strong></a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n194"><a class="md-toc-inner" href="#休谟">休谟</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n196"><a class="md-toc-inner" href="#一认识论基础经验主义与观念理论"><strong>一、认识论基础：经验主义与观念理论</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n204"><a class="md-toc-inner" href="#二对因果关系的颠覆性批判"><strong>二、对因果关系的颠覆性批判</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n213"><a class="md-toc-inner" href="#三对实体与自我的怀疑"><strong>三、对实体与自我的怀疑</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n219"><a class="md-toc-inner" href="#温和怀疑论mitigated-skepticism的实践立场"><strong>温和怀疑论（Mitigated Skepticism）的实践立场</strong></a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n227"><a class="md-toc-inner" href="#霍布斯">霍布斯</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n229"><a class="md-toc-inner" href="#一本体论与认识论机械唯物主义"><strong>一、本体论与认识论：机械唯物主义</strong></a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n237"><a class="md-toc-inner" href="#马克思"><strong>马克思</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n239"><a class="md-toc-inner" href="#一对传统认识论的批判脱离实践的思辨是虚幻的"><strong>一、对传统认识论的批判：脱离实践的思辨是虚幻的</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n245"><a class="md-toc-inner" href="#二实践的内涵人类改造世界的物质活动"><strong>二、实践的内涵：人类改造世界的物质活动</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n247"><a class="md-toc-inner" href="#三实践与认识的辩证关系"><strong>三、实践与认识的辩证关系</strong></a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n248"><a class="md-toc-inner" href="#1-实践是认识的来源和动力"><strong>1. 实践是认识的来源和动力</strong></a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n254"><a class="md-toc-inner" href="#2-实践是检验真理的唯一标准"><strong>2. 实践是检验真理的唯一标准</strong></a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n261"><a class="md-toc-inner" href="#3-认识对实践的能动反作用"><strong>3. 认识对实践的能动反作用</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n268"><a class="md-toc-inner" href="#三认识的发展规律实践→认识→再实践→再认识"><strong>三、认识的发展规律：实践→认识→再实践→再认识</strong></a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n271"><a class="md-toc-inner" href="#五阶级实践与意识形态批判"><strong>五、阶级实践与意识形态批判</strong></a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n278"><a class="md-toc-inner" href="#笛卡尔">笛卡尔</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n280"><a class="md-toc-inner" href="#一方法论基础普遍怀疑与我思"><strong>一、方法论基础：普遍怀疑与“我思”</strong></a></span></p></div><blockquote><p><span>作者Author：刘家亮</span></p><p><span>修改：@Alicetec</span></p></blockquote><h2 id='本体论'><span>本体论</span></h2><p><span>哲学本体论中关于“世界本原”（即世界的根本来源、基础或终极实在）的探讨，是哲学最核心的问题之一。不同哲学流派和哲学家提出了各种不同的理论，试图回答“什么是最根本的存在？”、“万物由什么构成？”或“什么是实在的最终本质？”</span></p><h2 id='各大哲学家所认为的世界的本质'><span>各大哲学家所认为的世界的本质</span></h2><ol><li><p><span>毕达哥拉斯认为“数”是本原</span></p></li><li><p><span>柏拉图提出“理念论”</span></p></li><li><p><span>米利都学派</span></p></li><li><p><span>泰勒斯提出“水”是万物之源</span></p></li><li><p><span>阿那克西曼德 ----“无定形”</span></p></li><li><p><span>阿那克西美尼 ---- “气”</span></p></li><li><p><span>辩证论</span></p></li><li><p><span>赫拉克利特认为“火”是世界的本原</span></p></li><li><p><span>多元论</span></p></li><li><p><span>恩培多克勒 四元素（火气水土）+ 爱/争动力</span></p></li><li><p><span>原子论</span></p></li><li><p><span>德谟克利特 原子（不可分粒子）+ 虚空 → 机械运动构成万物</span></p></li><li><p><span>心物二元论</span></p></li><li><p><span>我”作为思维实体必然真实。</span></p></li><li><p><span>笛卡尔作为近代哲学之父，其思想体系以理性怀疑为起点，构建了影响深远的心物二元论与理性主义认识论。以下是其核心观点的结构化解析：</span></p></li></ol><p>&nbsp;</p><h2 id='方法论基础普遍怀疑与我思'><span>方法论基础：普遍怀疑与“我思”</span></h2><p><span>怀疑一切</span></p><p><span>为寻求绝对确定的知识，对感官经验（“蜡烛融化”）、数学真理（“恶魔欺骗”）甚至自身存在进行彻底怀疑。</span></p><p><strong><span>第一真理：（我思故我在）：</span></strong></p><p><span>怀疑行为本身证明思考者存在 → “我”作为思维实体必然真实。</span></p><p><span>意义：将哲学根基从外部世界转向主体性认知（现代哲学转向标志）。</span></p><h2 id='认识论理性主义与天赋观念'><span>认识论：理性主义与天赋观念</span></h2><p><span>知识来源：</span></p><p><span>天赋观念：上帝植入人心的先验真理（如几何公理、自我存在）。</span></p><p><span>理性演绎：从天赋观念出发，通过逻辑推导构建知识体系（反对经验归纳）。</span></p><p><span>真理标准：</span></p><p><span>清晰分明原则：凡清晰分明感知到的观念即为真（需上帝保证可靠性）。</span></p><h3 id='西方认识论发展脉络'><span>西方认识论发展脉络</span></h3><h4 id='经验论培根→霍布斯→洛克→休谟'><span>经验论（培根→霍布斯→洛克→休谟）</span></h4><p><span>基本原则：知识源于感觉经验</span>
+<span>培根：破除“四假相”（种族/洞穴/市场/剧场），倡导实验归纳法（“知识即力量”）</span>
+<span>霍布斯：机械论哲学（知识=感觉材料的加减运算），强调因果必然性</span>
+<span>洛克：白板说（观念源于感觉/反省）、区分第一性质（客观）与第二性质（主观）</span>
+<span>休谟：彻底经验论（知觉=印象+观念）、质疑因果关系（习惯性联想而非必然规律）</span></p><h4 id='唯理论笛卡尔→斯宾诺莎'><span>唯理论（笛卡尔→斯宾诺莎）</span></h4><p><span>基本原则：知识源于先天理性</span>
+<span>笛卡尔：天赋观念（“我思故我在”）、理性演绎法（数学为模型）</span>
+<span>斯宾诺莎：几何学方法构建哲学体系（《伦理学》），真观念自明且互为因果</span></p><h4 id='认识论革命的关键转折'><span>认识论革命的关键转折</span></h4><p><span>休谟怀疑论：</span>
+<span>瓦解因果必然性 → 导致经验论与唯理论双重危机</span>
+<span>划分两类知识：</span>
+<strong><span>观念关系</span></strong><span>（数学/逻辑，必然真理）</span>
+<strong><span>实际事情</span></strong><span>（事实，或然真理）</span></p><h4 id='马克思的实践转向'><span>马克思的实践转向</span></h4><p><span>核心突破：认识基础从“先验理性”转向“社会实践”</span>
+<span>劳动综合：主客体在劳动中统一（人通过劳动认识自然与自我类本质）</span>
+<span>历史性：知识受社会结构制约，随实践发展而进化</span></p><h2 id='道德论功利主义'><span>道德论、功利主义</span></h2><p><span>功利主义（Utilitarianism）是一种以行为后果作为道德判断核心标准的伦理学理论，其核心信条是：一个行为的道德价值取决于它能否最大化整体福祉（Happiness/Well-being）或效用（Utility）。以下是对功利主义的详细阐述：</span></p><h3 id='一核心原则与哲学基础'><span>一、核心原则与哲学基础</span></h3><p><strong><span>最大幸福原则（Principle of Greatest Happiness）</span></strong>
+<span>行为的对错取决于它是否能带来 “最大多数人的最大幸福”（杰里米·边沁）。</span>
+<strong><span>福祉的定义</span></strong><span>：古典功利主义（如边沁）将福祉等同于快乐（Pleasure） 和痛苦的免除；现代版本（如约翰·密尔）扩展为涵盖精神满足、自由、尊严等更丰富的内涵。</span>
+<strong><span>效用计算</span></strong><span>：试图通过量化快乐与痛苦（强度、持续时间、确定性、邻近性等）来比较不同行为的后果。</span>
+<strong><span>后果主义（Consequentialism）</span></strong>
+<span>道德评价完全取决于行为的结果，而非动机、规则或行为本身的性质。</span>
+<span>例：若欺骗能挽救生命，则欺骗在道德上是正当的。</span>
+<strong><span>平等主义（Impartiality）</span></strong>
+<span>每个人的福祉都同等重要（“一人只算一人，无人多于一人”）。</span>
+<span>决策时需无偏见地计算所有受影响者的利益总和。</span></p><h3 id='二主要流派与发展'><span>二、主要流派与发展</span></h3><h4 id='古典功利主义'><span>古典功利主义</span></h4><p><span>边沁（Jeremy Bentham）：</span>
+<span>提出 “快乐计算法”（Hedonic Calculus），主张快乐只有量的差异（如强度、持久度）。</span>
+<span>名言：“针戏（简单游戏）与诗歌一样好” —— 若带来的快乐量相同，则价值无高下之分。</span>
+<span>密尔（John Stuart Mill）：</span>
+<span>修正边沁理论，提出快乐有质的区别：“做一个不满足的人，胜于做一只满足的猪”。</span>
+<span>精神快乐（如求知、审美）高于感官快乐，因其更能体现人的尊严。</span></p><h4 id='康德的义务论'><span>康德的义务论</span></h4><p><span>康德的义务论（Deontology）是伦理学中最具影响力的理论体系之一，其核心在于道德行为的价值取决于行为者是否遵循普遍的道德法则，而非行为的结果。以下从哲学基础、核心原则、实践推演到批判与发展，系统阐述康德义务论：</span></p><h5 id='一哲学根基理性与自由'><span>一、哲学根基：理性与自由</span></h5><p><span>康德在《道德形而上学奠基》中构建义务论，基于两大前提：</span>
+<span>人是理性存在者</span>
+<span>理性使人能够认识并服从道德律（Moral Law）。</span>
+<span>自由意志是道德的前提</span>
+<span>只有自由选择的行动才具有道德价值（被迫行为无善恶之分）</span></p><h5 id='二核心原则定言命令categorical-imperative'><span>二、核心原则：定言命令（Categorical Imperative）</span></h5><p><span>道德法则必须是普遍的、无条件的命令（而非“如果…那么…”式的假言命令）。</span></p><h5 id='三道德价值的源泉善良意志'><span>三、道德价值的源泉：善良意志</span></h5><p><span>唯一无条件善的事物：</span>
+<span>“善良意志之为善，并不因它促成什么或实现什么，而仅因其意愿本身即为善。”</span>
+<span>动机决定道德性：</span>
+<span>✅ 出于义务（Duty）：因“这是道德法则要求”而行动（如诚实因诚实本身）。</span>
+<span>❌ 合乎义务但非出于义务：行为正确但动机不纯（如诚实因怕惩罚）。</span>
+<span>情感无道德价值：同情心驱动的善行虽可嘉，但非道德（因非理性选择）。</span></p><p>&nbsp;</p><p>&nbsp;</p><hr /><p>&nbsp;</p><hr /><p>&nbsp;</p><p>&nbsp;</p><h2 id='康德'><strong><span>康德</span></strong></h2><h3 id='1-哥白尼式革命主体中心性'><strong><span>1. “哥白尼式革命”：主体中心性</span></strong></h3><p><strong><span>传统观点：</span></strong><span> 知识是心灵（主体）被动地符合对象（客体）。</span></p><p><strong><span>康德革命：</span></strong><span> 对象必须符合我们心灵的先天认识形式。换句话说，不是心灵围着对象转，而是对象围着心灵转（在认识论意义上）。我们不是被动地接受感觉材料，而是主动地运用我们固有的认知结构去组织和规定经验。</span></p><p><strong><span>核心意义：</span></strong><span> 知识之所以可能，是因为我们先天具有一套认识形式，它们像一副“有色眼镜”，所有进入我们认识范围的对象都必须透过这副眼镜被我们认识。这副“眼镜”决定了我们能认识什么以及如何认识。</span></p><h3 id='2-知识的构成经验材料--先天形式'><strong><span>2. 知识的构成：经验材料 + 先天形式</span></strong></h3><p><span>康德认为，一切知识都开始于</span><strong><span>经验</span></strong><span>（感官接触外部世界），但并非都来源于经验。知识由两个要素构成：</span></p><p><strong><span>后天的质料：</span></strong><span> 来自感官经验的、杂多的、无序的感觉材料。</span></p><p><strong><span>先天的形式：</span></strong><span> 主体心灵固有的、独立于一切经验的认知框架。这些形式本身不包含任何经验内容，但它们是我们整理、组织和理解经验材料的</span><strong><span>必要条件</span></strong><span>。</span></p><h3 id='3-先天综合判断知识的普遍必然性如何可能'><strong><span>3. 先天综合判断：知识的普遍必然性如何可能？</span></strong></h3><p><strong><span>分析判断：</span></strong><span> 谓词概念已经包含在主词概念中（如“所有单身汉都是未婚的”）。这类判断是</span><strong><span>必然真</span></strong><span>的，但只涉及概念关系，</span><strong><span>不增加新知识</span></strong><span>。</span></p><p><strong><span>综合判断：</span></strong><span> 谓词概念不包含在主词概念中，需要借助经验添加（如“这朵花是红色的”）。这类判断</span><strong><span>扩展了知识</span></strong><span>，但只具有</span><strong><span>偶然性</span></strong><span>（依赖具体经验）。</span></p><p><strong><span>问题：</span></strong><span> 科学知识（如数学、物理学原理）要求既是</span><strong><span>综合的</span></strong><span>（扩展知识），又是</span><strong><span>先天的</span></strong><span>（普遍必然）。这种“先天综合判断”如何可能？</span></p><p><strong><span>康德的解答：</span></strong><span> 先天综合判断之所以可能，正是因为我们心灵具有</span><strong><span>先天的认识形式</span></strong><span>。这些形式（时空、范畴）被应用于经验材料，从而产生出既具有经验内容（综合的），又具有普遍必然性（先天的）的知识。例如，几何学是关于空间（先天直观形式）的科学；算术与时间（先天直观形式）相关；“一切发生之事皆有原因”依赖于因果性范畴（先天知性概念）。</span></p><h3 id='4-感性接受性与先天直观形式'><strong><span>4. 感性：接受性与先天直观形式</span></strong></h3><p><strong><span>功能：</span></strong><span> 通过感官被动地接受外部刺激，产生</span><strong><span>感觉</span></strong><span>。</span></p><p><strong><span>先天形式：空间：</span></strong><span> 外部感觉的先天形式。一切外部现象必须被安排在空间关系中才能被我们感知。空间不是从经验中抽象出来的概念，而是我们感知外部世界的前提条件。</span></p><p><strong><span>时间：</span></strong><span> 内部感觉（以及一切表象）的先天形式。所有意识活动（包括内部感受和外部感觉）都必须发生在时间序列中。时间是内直观的形式。</span></p><p><strong><span>结果：</span></strong><span> 感性运用空间和时间形式，将感觉材料整理成具有时空秩序的</span><strong><span>现象</span></strong><span>（Erscheinungen），即我们直接感知到的对象。</span><strong><span>我们只能认识在时空中向我们显现的对象（现象），而非对象本身（物自体）。</span></strong></p><h3 id='5-知性自发性与先天范畴'><strong><span>5. 知性：自发性与先天范畴</span></strong></h3><p><strong><span>功能：</span></strong><span> 主动地思维、判断，将感性提供的直观杂多</span><strong><span>综合统一</span></strong><span>起来，形成具有客观性和规律性的知识（经验对象和自然规律）。知性是规则的能力。</span></p><p><strong><span>先天形式：范畴</span></strong></p><p><span>范畴是纯粹的知性概念（如：实体、因果性、交互性、可能性、必然性等共12个），它们不来自经验，而是知性固有的思维形式。</span></p><p><strong><span>图型论：</span></strong><span> 范畴是高度抽象的纯概念，不能直接应用于感性的、时空性的直观材料。需要一个中介——</span><strong><span>图型</span></strong><span>。图型是想象力产生的一种先验的时间规定（如因果性范畴的图型是时间中的规则相继）。通过图型，抽象的范畴得以具体化并应用于经验现象。</span></p><p><strong><span>原理：</span></strong><span> 范畴通过图型应用于现象，形成支配经验的先天综合原理（如“实体永恒原理”、“因果律”、“交互作用原理”等）。这些原理构成了自然科学知识的基础框架。</span></p><p><strong><span>核心原则：“统觉的先验统一”</span></strong><span>：这是康德认识论的最高点。指“我思”必须能够伴随我的一切表象。正是这个“自我同一性”的意识（先验自我），作为统一性的根源，使得知性能够运用范畴把杂多的表象综合为一个具有统一性的对象意识。对象意识的统一性源于自我意识的统一性。</span><strong><span>对象=规则下的现象杂多之统一。</span></strong></p><h3 id='6-理性追求无条件者与理念'><strong><span>6. 理性：追求无条件者与理念</span></strong></h3><p><strong><span>功能：</span></strong><span> 追求知识的绝对统一性和无条件的基础，试图超越经验的界限，达到对</span><strong><span>理念</span></strong><span>（灵魂、世界整体、上帝）的认识。</span></p><p><strong><span>理念：</span></strong><span> 理性产生的纯粹概念（灵魂作为思维主体的绝对统一体；世界作为现象序列的绝对整体；上帝作为一切可能性的最高根据）。理念不是经验对象，而是调节性的理想目标。</span></p><p><strong><span>二律背反：</span></strong><span> 当理性试图运用只适用于经验现象的知性范畴去认识超越经验的理念（特别是“世界整体”）时，必然陷入无法调和的矛盾（如“世界在时空上有开端/无开端”等）。这证明了人类</span><strong><span>理论理性</span></strong><span>的界限：理念（灵魂、世界整体、上帝）</span><strong><span>不能作为知识的对象</span></strong><span>。理性在认识领域的误用会导致幻相。</span></p><h3 id='7现象与物自体认识界限的划界'><strong><span>7.现象与物自体：认识界限的划界</span></strong></h3><p><strong><span>现象：</span></strong><span> 是对象通过我们的感性形式（时空）和知性范畴向我们显现出来的样子。</span><strong><span>现象是知识的唯一合法对象。</span></strong><span> 我们只能认识事物对我们的显现方式。</span></p><p><strong><span>物自体：</span></strong></p><p><span>指独立于我们的感性形式和知性范畴而存在的对象本身（自在之物）。</span></p><p><strong><span>物自体不可知：</span></strong><span> 因为我们的一切认识形式（时空、范畴）都只能应用于由感性提供的材料，而这些材料已经是经过时空形式“过滤”后的显现。我们无法穿透显现去认识物自体本身。 </span></p><p><strong><span>物自体的意义：</span></strong></p><p><strong><span>消极意义：</span></strong><span> 划定了理论认识的界限，防止理性僭越。我们无法获得关于灵魂不朽、上帝存在、世界开端的理论知识。</span></p><p><strong><span>积极意义：</span></strong><span> 为</span><strong><span>信仰</span></strong><span>（道德、自由）留出空间。物自体领域虽然不可知，但可以“思维”。在实践领域（道德），我们通过自由意志可以设定物自体的存在（如自由意志本身就是一种物自体）。</span></p><p><strong><span>康德认识论的核心意义与影响：</span></strong></p><p><strong><span>为科学奠基：</span></strong><span> 解释了数学和自然科学（牛顿物理学）的普遍必然性何以可能，为其提供了哲学基础（先天形式的作用）。</span></p><p><strong><span>划定理性的界限：</span></strong><span> 严格区分了可知的现象界与不可知的物自体领域，限制了理论理性的僭越，防止了独断论。</span></p><p><strong><span>强调主体能动性：</span></strong><span> 知识不是被动接受，而是主体运用先天认知形式主动构造（综合）的结果。人是知识的立法者。</span></p><p><strong><span>区分知识与信仰：</span></strong><span> 在现象界确立科学知识的权威，在物自体领域为道德、自由和宗教信仰保留了空间。</span></p><p><strong><span>深远影响：</span></strong><span> 康德的认识论是现代哲学（尤其是德国观念论、现象学、分析哲学）最重要的起点之一，其提出的问题（主体性、知识的条件与界限、语言与思维等）持续塑造着哲学的讨论。</span></p><p><strong><span>总结来说，康德认识论的核心在于：</span></strong><span> </span><strong><span>知识是主体运用其先天固有的感性形式（时空）和知性范畴（如因果性），对通过感官获得的后天经验材料进行主动综合构造的产物。我们只能认识向我们显现的现象界，而物自体本身不可知。正是这种主体的先天认识结构，使得具有普遍必然性的科学知识（先天综合判断）成为可能，同时也严格划定了人类理论认识的界限。</span></strong></p><h2 id='休谟'><span>休谟</span></h2><p><span>大卫·休谟（1711-1776）是苏格兰启蒙运动的核心人物，其哲学体系以</span><strong><span>彻底的经验主义</span></strong><span>和</span><strong><span>温和的怀疑论</span></strong><span>著称。他的思想深刻挑战了传统形而上学、宗教和科学知识的根基，对康德、现代实证主义乃至分析哲学产生了深远影响。以下是休谟哲学观的核心要点：</span></p><h3 id='一认识论基础经验主义与观念理论'><strong><span>一、认识论基础：经验主义与观念理论</span></strong></h3><p><strong><span>知觉的两分法：印象（Impressions）与观念（Ideas）</span></strong></p><p><strong><span>印象</span></strong><span>：指当下直接、强烈、生动的感官体验（如疼痛、颜色、声音）或情感（如愤怒、喜悦）。</span></p><p><strong><span>观念</span></strong><span>：是印象在思维中的“暗淡拷贝”，通过记忆或想象再现（如回忆昨天的阳光）。</span></p><p><strong><span>核心原则</span></strong><span>：</span><strong><span>一切观念最终源于印象</span></strong><span>（“观念是印象的摹本”）。若一个概念无法追溯到任何印象（如“天使的翅膀”），则它只是无意义的语词组合。</span></p><p><strong><span>知识分类：观念关系（Relations of Ideas）与事实问题（Matters of Fact）</span></strong></p><p><strong><span>观念关系</span></strong><span>：仅凭逻辑即可确定的真理（如数学、几何命题：“三角形内角和=180°”）。这类知识具有必然性，但不涉及现实世界。</span></p><p><strong><span>事实问题</span></strong><span>：关于经验世界的陈述（如“太阳明天会升起”）。这类知识依赖经验，</span><strong><span>没有必然性</span></strong><span>，只具有或然性（可能性）。</span></p><h3 id='二对因果关系的颠覆性批判'><strong><span>二、对因果关系的颠覆性批判</span></strong></h3><p><span>休谟对因果律的质疑是其哲学最革命性的部分：</span></p><p><strong><span>因果关系的本质是什么？</span></strong></p><p><span>我们观察到事件A（因）后总跟随事件B（果）（如台球A撞击后B移动），便认为A“导致”B。</span></p><p><span>但休谟指出：</span><strong><span>我们从未感知到“必然联系”（Necessary Connection）</span></strong><span>！我们只看到两个事件在时空上</span><strong><span>恒常联结</span></strong><span>（Constant Conjunction）和</span><strong><span>先后发生</span></strong><span>（Priority in Time）。</span></p><p><strong><span>因果信念的心理起源：习惯性联想</span></strong></p><p><span>因果推断并非理性推理，而是由</span><strong><span>心理习惯</span></strong><span>（Custom/Habit）驱动：</span></p><p><span>“多次重复后，心灵会因习惯而期待看到B跟随A……这种倾向就是因果信念的全部本质。”</span></p><p><strong><span>结论</span></strong><span>：因果关系只是主观的心理投射，无法被理性证明。科学规律本质上是基于经验的概率性概括，</span><strong><span>没有必然性</span></strong><span>。</span></p><h3 id='三对实体与自我的怀疑'><strong><span>三、对实体与自我的怀疑</span></strong></h3><p><strong><span>物质实体（如“物体”）不存在</span></strong></p><p><span>我们所谓的“物体”只是一束同时或相继出现的感官印象（如颜色、硬度、形状）。休谟质问：</span><strong><span>你能否感知到“物质”本身？</span></strong><span> 答案是否定的。</span></p><p><strong><span>自我（灵魂）是一种虚构</span></strong></p><p><span>当内省时，我们只感知到具体的知觉（愤怒、记忆、声音），却从未捕捉到一个独立的“自我”。</span></p><p><strong><span>“自我”只是一束流动的知觉集合</span></strong><span>，由想象通过因果关系串联起来。这一观点直接否定了笛卡尔的“我思故我在”。</span></p><h3 id='温和怀疑论mitigated-skepticism的实践立场'><strong><span>温和怀疑论（Mitigated Skepticism）的实践立场</span></strong></h3><p><span>休谟并非否定一切知识，而是主张：</span></p><p><strong><span>理论层面</span></strong><span>：承认人类理性的限度（如因果、实体不可知），抵制独断论。</span></p><p><strong><span>实践层面</span></strong><span>：</span></p><p><span>遵循自然本能（如相信因果律）。</span></p><p><span>依靠经验与概率指导生活（如科学、日常决策）。</span></p><p><span>在社交与情感中寻找意义（反对脱离生活的玄思）。</span></p><p><span>“做一个哲学家吧，但在你的全部哲学中，仍然要做一个人。”</span>
+<span>——休谟《人性论》</span></p><h2 id='霍布斯'><span>霍布斯</span></h2><p><span>托马斯·霍布斯（Thomas Hobbes，1588–1679）是英国启蒙运动早期的关键哲学家，其思想以</span><strong><span>机械唯物主义</span></strong><span>、</span><strong><span>绝对主权理论</span></strong><span>和对</span><strong><span>人性悲观的现实主义</span></strong><span>著称。他的政治哲学巨著《利维坦》（1651）奠定了现代政治思想的基础。以下是霍布斯哲学观的核心框架：</span></p><h3 id='一本体论与认识论机械唯物主义'><strong><span>一、本体论与认识论：机械唯物主义</span></strong></h3><p><strong><span>宇宙是运动的物质机器</span></strong></p><p><span>世界仅由</span><strong><span>物质</span></strong><span>构成，一切现象（包括生命、思想、情感）都是物质微粒的</span><strong><span>机械运动</span></strong><span>。</span></p><p><span>否定非物质实体（如笛卡尔的“心灵实体”），宣称“灵魂是头脑中的精细物质”。</span></p><p><strong><span>知识源于感官经验</span></strong></p><p><span>所有观念都来自感官对物体运动的感知（如颜色是物体运动在视网膜引发的反应）。</span></p><p><strong><span>推理即计算</span></strong><span>：思维是“观念的加减”（如“人=理性+动物”），真理取决于逻辑一致性而非符合现实。</span></p><p><strong><span>名言</span></strong><span>：“宇宙是物质的；一切变化都是运动。”</span></p><h2 id='马克思'><strong><span>马克思</span></strong></h2><p><span>马克思的哲学革命性在于将</span><strong><span>实践</span></strong><span>（Praxis）置于认识论的核心，彻底颠覆了传统哲学中“理论优先”的思维模式。他的认识论可概括为：</span><strong><span>认识源于实践、服务于实践，并在实践中接受检验与发展</span></strong><span>。以下是马克思关于实践与认识的核心观点及其哲学内涵：</span></p><h3 id='一对传统认识论的批判脱离实践的思辨是虚幻的'><strong><span>一、对传统认识论的批判：脱离实践的思辨是虚幻的</span></strong></h3><p><span>马克思在《关于费尔巴哈的提纲》（1845）中开宗明义：</span></p><p><strong><span>“从前的一切唯物主义（包括费尔巴哈的唯物主义）的主要缺点是：对对象、现实、感性，只是从客体的或者直观的形式去理解……不是从主体方面去理解。”</span></strong></p><p><strong><span>批判旧唯物主义</span></strong><span>：将认识视为被动接受外部刺激（如镜子反映物体），忽略人的</span><strong><span>能动性</span></strong></p><p><strong><span>批判唯心主义</span></strong><span>（如黑格尔）：将思维过程独立化，认为精神创造现实，却脱离</span><strong><span>物质基础</span></strong><span>。</span></p><p><strong><span>核心结论</span></strong><span>：脱离实践的认识论是空洞的，真理问题本质上是</span><strong><span>实践问题</span></strong><span>。</span></p><h3 id='二实践的内涵人类改造世界的物质活动'><strong><span>二、实践的内涵：人类改造世界的物质活动</span></strong></h3><p><span>马克思的“实践”不是抽象概念，而是</span><strong><span>感性的、对象性的物质活动</span></strong></p><h3 id='三实践与认识的辩证关系'><strong><span>三、实践与认识的辩证关系</span></strong></h3><h4 id='1-实践是认识的来源和动力'><strong><span>1. 实践是认识的来源和动力</span></strong></h4><p><strong><span>认识始于实践需求</span></strong><span>：</span></p><p><span>“人类始终只提出自己能够解决的任务……任务本身，只有在解决它的物质条件已经存在或者至少是在生成过程中的时候，才会产生。”（《政治经济学批判》序言）</span></p><p><strong><span>例</span></strong><span>：几何学源于古埃及尼罗河泛滥后的土地测量需求。</span></p><p><strong><span>实践推动认识深化</span></strong><span>：</span></p><p><span>大工业发展催生近代物理学（如蒸汽机效率问题→热力学诞生）。</span></p><h4 id='2-实践是检验真理的唯一标准'><strong><span>2. 实践是检验真理的唯一标准</span></strong></h4><p><strong><span>理论的真理性需在实践中验证</span></strong><span>：</span></p><p><span>“人的思维是否具有客观的真理性，这不是一个理论的问题，而是一个</span><strong><span>实践的问题</span></strong><span>。”（《关于费尔巴哈的提纲》）</span></p><p><strong><span>例</span></strong><span>：爱因斯坦相对论通过水星近日点进动观测和引力透镜实验被证实。</span></p><p><strong><span>实践标准的辩证性</span></strong><span>：</span></p><p><span>实践检验具有</span><strong><span>历史局限性</span></strong><span>（如牛顿力学在宏观低速领域的真理性）；</span></p><p><span>真理在</span><strong><span>反复实践</span></strong><span>中修正发展（如从地心说到日心说的千年验证）。</span></p><h4 id='3-认识对实践的能动反作用'><strong><span>3. 认识对实践的能动反作用</span></strong></h4><p><strong><span>科学理论指导实践</span></strong><span>：</span></p><p><span>马克思主义理论→指导无产阶级革命；</span></p><p><span>基因编辑技术（CRISPR）→改造农作物实践。</span></p><p><strong><span>错误理论阻碍实践</span></strong><span>：</span></p><p><span>“种族优越论”导致殖民暴行；</span></p><p><span>教条化马克思主义曾造成社会主义建设挫折。</span></p><h3 id='三认识的发展规律实践→认识→再实践→再认识'><strong><span>三、认识的发展规律：实践→认识→再实践→再认识</span></strong></h3><p><span>毛泽东在《实践论》中系统发展了马克思的思想：</span></p><p><span>实践 → 感性认识（现象）→ 理性认识（本质）→ 实践检验 → 修正认识 → 新实践…… </span></p><h3 id='五阶级实践与意识形态批判'><strong><span>五、阶级实践与意识形态批判</span></strong></h3><p><span>马克思揭示：</span><strong><span>认识具有阶级性</span></strong><span>，脱离阶级实践的理论常沦为意识形态工具：</span></p><p><strong><span>统治阶级意识形态</span></strong><span>：</span></p><p><span>资产阶级宣扬“自由契约论”，掩盖雇佣劳动中的剥削实质。</span></p><p><strong><span>无产阶级认识论使命</span></strong><span>：</span></p><p><span>通过</span><strong><span>革命实践</span></strong><span>打破意识形态幻象，建立科学社会主义认识：</span></p><p><span>“哲学家用不同方式</span><strong><span>解释世界</span></strong><span>，问题在于</span><strong><span>改变世界</span></strong><span>。”（《关于费尔巴哈的提纲》第十一条）</span></p><h2 id='笛卡尔'><span>笛卡尔</span></h2><p><strong><span>笛卡尔</span></strong><span>作为近代哲学之父，其思想体系以</span><strong><span>理性怀疑</span></strong><span>为起点，构建了影响深远的</span><strong><span>心物二元论</span></strong><span>与</span><strong><span>理性主义认识论</span></strong><span>。以下是其核心观点的结构化解析：</span></p><h3 id='一方法论基础普遍怀疑与我思'><strong><span>一、方法论基础：普遍怀疑与“我思”</span></strong></h3><p><strong><span>怀疑一切</span></strong></p><p><span>为寻求绝对确定的知识，对感官经验（“蜡烛融化”）、数学真理（“恶魔欺骗”）甚至自身存在进行彻底怀疑。</span></p><p><strong><span>第一真理：（我思故我在）</span></strong><span>：</span></p><p><span>怀疑行为本身证明思考者存在 → </span><strong><span>“我”作为思维实体必然真实</span></strong><span>。</span></p><p><span>意义：将哲学根基从外部世界转向主体性认知（现代哲学转向标志）。</span></p></div></div>
+
+<script>(function(){function e(e,n,i){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var t=e.target;t&&t!=this;t=t.parentNode)if(t.matches(n)){!1===i.call(t,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)}var t=document.body.parentElement,i=[],r=null,o=document.body.classList.contains("typora-export-collapse-outline");function a(){return t.scrollTop}e("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),u(),!1}),e("click",".outline-item",function(e){var t=this.querySelector(".outline-label");location.hash="#"+t.getAttribute("href"),o&&((t=this.closest(".outline-item-wrapper").classList).contains("outline-item-open")||t.add("outline-item-open"),d(),t.add("outline-item-active"))});function s(){var e=a();r=null;for(var t=0;t<i.length&&i[t][1]-e<60;t++)r=i[t]}function n(){c=setTimeout(function(){var n;i=[],n=a(),document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(e=>{var t=e.getAttribute("id");i.push([t,n+e.getBoundingClientRect().y])}),s(),u()},300)}var l,c,d=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},u=function(){if(r&&(d(),t=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(r[0]):r[0])+'"]')))if(o){var e=t.closest(".outline-item-open>ul>.outline-item-wrapper");if(e)e.classList.add("outline-item-active");else{for(var t,n=(t=t.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");n;)n=(t=n).parentElement.closest(".outline-item-wrapper");t.classList.add("outline-item-active")}}else t.closest(".outline-item-wrapper").classList.add("outline-item-active")};window.addEventListener("scroll",function(e){l&&clearTimeout(l),l=setTimeout(function(){s(),u()},300)});window.addEventListener("resize",function(e){c&&clearTimeout(c),n()}),n()})();</script></body>
+</html>
