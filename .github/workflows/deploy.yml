@@ -1,0 +1,20 @@
+name: Deploy Static Website
+
+on:
+  push:
+    branches: [ main ]  # 当推送到 main 分支时触发
+  pull_request:
+    branches: [ main ]  # 可选：当对 main 分支发起 PR 时触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .  # 发布当前目录下的所有文件
+        publish_branch: gh-pages  # 发布到 gh-pages 分支
