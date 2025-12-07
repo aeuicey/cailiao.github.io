@@ -5,3 +5,9 @@
 1. [土木工程材料](https://aeuicey.github.io/cailiao.github.io/html/daer/cailiao.html)
 1. [哲学基础](https://aeuicey.github.io/cailiao.github.io/html/daer/zhexue.html)
 1. [经济学](https://aeuicey.github.io/cailiao.github.io/html/daer/jingjixue.html)
+
+
+
+## 大三
+
+​            1.[经济法](https://aeuicey.github.io/cailiao.github.io/html/dasan/jingjifa.html)
