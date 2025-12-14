@@ -10,4 +10,8 @@
 
 ## 大三
 
-​            1.[经济法](https://aeuicey.github.io/cailiao.github.io/html/dasan/jingjifa.html)
+1. [经济法](https://aeuicey.github.io/cailiao.github.io/html/dasan/jingjifa.html)
+2. [经济法补](https://aeuicey.github.io/cailiao.github.io/html/dasan/经济法补.html)    
+3. [钢混迅速上手复习资料](https://cloudreve.alicetec.cn/s/eYTk)        
+
+由 @Alicedreve 贡献PDF存储与预览
