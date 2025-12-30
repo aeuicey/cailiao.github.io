@@ -12,6 +12,7 @@
 
 1. [经济法](https://aeuicey.github.io/cailiao.github.io/html/dasan/jingjifa.html)
 2. [经济法补](https://aeuicey.github.io/cailiao.github.io/html/dasan/经济法补.html)    
-3. [钢混迅速上手复习资料](https://cloudreve.alicetec.cn/s/eYTk)        
+3. [钢混迅速上手复习资料](https://cloudreve.alicetec.cn/s/eYTk)       
+4. [毛概复习资料](https://aeuicey.github.io/cailiao.github.io/html/dasan/毛概复习资料.html) 
 
 由 @Alicedreve 贡献PDF存储与预览
