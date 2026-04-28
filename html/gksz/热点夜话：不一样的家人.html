@@ -1,0 +1,708 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'><style type='text/css'>html {overflow-x: initial !important;}</style>
+<style type='text/css'  id="style-base">:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, "Segoe UI Emoji", "SF Pro", sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p *, #write.first-line-indent svg * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; position: relative; }
+#write svg h1, #write svg h2, #write svg h3, #write svg h4, #write svg h5, #write svg h6, #write svg p { position: static; }
+svg sub, svg sup { position: static; }
+.nodeLabel p { padding-right: 2px; padding-left: 2px; }
+.typora-export .nodeLabel p { padding-right: 0px; padding-left: 0px; }
+foreignobject { overflow: visible; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+li p { orphans: 1; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.mermaid-svg { margin: auto; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left: 0.25em solid rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+</style>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic&amp;subset=latin-ext' type='text/css' />
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:900,300&amp;subset=latin-ext' type='text/css' />
+<style type='text/css'  id="style-theme_css">@include-when-export url(https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic&subset=latin-ext);
+@include-when-export url(https://fonts.googleapis.com/css?family=Lato:900,300&subset=latin-ext);
+
+:root {
+	--control-text-color: #777;
+}
+
+/**
+ * forked from pixyll.com
+ * MIT license
+ */
+
+h1,
+.h1,
+.f1 {
+	font-size: 2rem;
+	line-height: 2.5rem;
+}
+h2,
+.h2,
+.f2 {
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+h3,
+.h3,
+.f3 {
+	font-size: 1.25rem;
+	line-height: 1.5rem;
+}
+p,
+.p,
+.f4,
+h4,
+h5,
+h6,
+dl,
+ol,
+ul,
+pre[cid],
+div[cid],
+#typora-source {
+	font-size: 1.125rem;
+	line-height: 1.5rem;
+}
+
+h4 {
+	font-size: 1.13rem;
+}
+/*
+ Pixyll
+ A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff.
+ Best served with BASSCSS (http://jxnblk.github.io/basscss)
+ Crafted with <3 by John Otander (@4lpine) - ©2015 John Otander MIT License http://opensource.org/licenses/MIT
+
+*/
+
+body {
+	font-family: "Merriweather", "PT Serif", Georgia, "Times New Roman", "STSong", 'Segoe UI Emoji','SF Pro', Serif;
+	line-height: 1.5rem;
+	font-weight: 400;
+}
+
+#write {
+	max-width: 914px;
+	color: #333;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1100px;
+	}
+}
+
+@media only screen and (min-width: 1700px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+img {
+	width: auto;
+	max-width: 100%;
+}
+body {
+	font-size: 1.5rem;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.ty-table-edit {
+	background: #ededed;
+}
+
+table {
+	width: 100%;
+	font-size: 1.125rem;
+}
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td,
+table > tfoot > tr > th,
+table > tfoot > tr > td {
+	padding: 12px;
+	line-height: 1.2;
+	vertical-align: top;
+	border-top: 1px solid #333;
+}
+table > thead > tr > th {
+	vertical-align: bottom;
+	border-bottom: 2px solid #333;
+}
+table > caption + thead > tr:first-child > th,
+table > caption + thead > tr:first-child > td,
+table > colgroup + thead > tr:first-child > th,
+table > colgroup + thead > tr:first-child > td,
+table > thead:first-child > tr:first-child > th,
+table > thead:first-child > tr:first-child > td {
+	border-top: 0;
+}
+table > tbody + tbody {
+	border-top: 2px solid #333;
+}
+p {
+	font-weight: 300;
+	line-height: 1.5;
+}
+abbr {
+	border-bottom: 1px black dotted;
+	cursor: help;
+}
+pre,
+code {
+	font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
+code,
+.md-fences  {
+	color: #7a7a7a;
+}
+
+.md-fences {
+	padding: 1.125em;
+	margin-bottom: 0.88em;
+	font-size: 1rem;
+	border: 1px solid #7a7a7a;
+	padding-bottom: 0.5rem;
+	padding-top: 0.5rem;
+}
+
+blockquote {
+	padding: 1.33em;
+	font-style: italic;
+	border-left: 5px solid #7a7a7a;
+	color: #555;
+}
+blockquote em {
+	color: #000;
+}
+blockquote footer {
+	font-size: .85rem;
+	font-style: normal;
+	background-color: #fff;
+	color: #7a7a7a;
+	border-color: transparent;
+}
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+	font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: bold;
+	line-height: 1.2;
+	margin: 1em 0 0.5em;
+}
+@media screen and (min-width: 48em) {
+	.h1,
+	h1 {
+		font-size: 3.250rem;
+	}
+	.h2,
+	h2 {
+		font-size: 2.298rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.625rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.3rem;
+	}
+	#write>h4.md-focus:before,
+	#write>h5.md-focus:before,
+	#write>h6.md-focus:before{
+		top: 1px;
+	}
+	.p,
+	p,
+	li {
+		font-size: 1.25rem;
+		line-height: 1.8;
+	}
+	table {
+		font-size: 1.25rem;
+	}
+}
+@media (max-width: 48em) {
+	blockquote {
+		margin-left: 1rem;
+		margin-right: 0;
+		padding: 0.5em;
+	}
+	.h1,
+	h1 {
+		font-size: 2.827rem;
+	}
+	.h2,
+	h2 {
+		font-size: 1.999rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.413rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.3rem;
+	}
+}
+@media screen and (min-width: 64em) {
+	.h1,
+	h1 {
+		font-size: 4.498rem;
+	}
+	.h2,
+	h2 {
+		font-size: 2.29rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.9rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.591rem;
+	}
+	#write>h4.md-focus:before{
+		top:4px;
+	}
+}
+a {
+	color: #463F5C;
+	text-decoration: underline;
+}
+
+#write {
+	padding-top: 2rem;
+}
+
+#write pre.md-meta-block {
+	min-height: 35px;
+	padding: 0.5em 1em;
+	white-space: pre;
+	border: 0px;
+
+	border-left: 30px #f8f8f8 solid;
+	border-right: 30px #f8f8f8 solid;
+	width: 100vw;
+	max-width: calc(100% + 60px);
+
+	margin-left: -30px;
+	margin-bottom: 2em;
+	margin-top: -2010px;
+	padding-top: 2000px;
+	padding-bottom: 10px;
+	line-height: 1.5em;
+	color: #7a7a7a;
+	background-color: #fafafa;
+	font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: 300;
+	clear: both;
+	padding-left: 0;
+	font-size:1.125rem;
+}
+.md-image>.md-meta {
+	color: #463F5C
+}
+.footnotes {
+	font-size:1.1rem;
+}
+.md-tag {
+	font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+}
+.code-tooltip {
+	background: white;
+}
+.code-tooltip-content {
+	font-size: 1.1rem;
+}
+
+.task-list{
+	padding-left: 0;
+}
+
+.md-task-list-item {
+	padding-left:34px;
+}
+
+.md-task-list-item > input{
+	width: 1.25rem;
+	height: 1.25rem;
+	display: block;
+	-webkit-appearance: initial;
+	top: -0.2rem;
+	margin-left: -1.6em;
+	margin-top: calc(1rem - 7px);
+	border: none;
+}
+
+.md-task-list-item > input:focus{
+	outline: none;
+	box-shadow: none;
+}
+
+.md-task-list-item > input:before{
+	border: 1px solid #555;
+	border-radius: 1.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	background: #fff;
+	content: ' ';
+	transition: background-color 200ms ease-in-out;
+	display: block;
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before{
+	background: #333;
+	border-width: 2px;
+	display:inline-block;
+	transition: background-color 200ms ease-in-out;
+}
+
+.md-task-list-item > input:checked:after,
+.md-task-list-item > input[checked]:after {
+	opacity: 1;
+}
+
+.md-task-list-item > input:after {
+	opacity: 1;
+	-webkit-transition: opacity 0.05s ease-in-out;
+	-moz-transition: opacity 0.05s ease-in-out;
+	transition: opacity 0.05s ease-in-out;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	position: absolute;
+	top: 0.4375rem;
+	left: 0.28125rem;
+	width: 0.9375rem;
+	height: 0.5rem;
+	border: 3px solid #fff;
+	border-top: 0;
+	border-right: 0;
+	content: ' ';
+	opacity: 0;
+}
+
+.md-tag {
+	color:inherit;
+}
+
+.md-toc:focus .md-toc-content{
+	margin-top: 19px;
+}
+
+#typora-sidebar {
+	font-size:1rem !important;
+}
+
+.html-for-mac #typora-sidebar {
+	background-color:white;
+}
+
+.outline-content li, .outline-content ul {
+	font-size:1rem !important;
+}
+
+.outline-title {
+	line-height: inherit;
+	margin-top: 10px;
+}
+
+.outline-expander {
+	width: 18px;
+}
+
+.outline-expander:before {
+ 	content: "+";
+	font-family: inherit;
+	color: rgb(108, 108, 108); 
+  font-size: 1.5rem;
+ 	top: -0.1rem;
+}
+
+.outline-expander:hover:before {
+	content: "+";
+}
+
+.outline-item-open>.outline-item>.outline-expander:before{
+	content: "-";
+}
+
+/** source code mode */
+#typora-source {
+	font-family: Courier, monospace;
+    color: #6A6A6A;
+}
+
+.os-windows #typora-source {
+	font-family: inherit;
+}
+
+.cm-s-typora-default .cm-header, 
+.cm-s-typora-default .cm-property,
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor {
+	color: #428bca;
+}
+
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number {
+	color: #777777;
+}
+
+.md-diagram-panel {
+	margin-top: 24px;
+	margin-left: -1.2em;
+}
+
+.md-mathjax-midline {
+	background: #fafafa;
+}
+
+.enable-diagrams pre.md-fences[lang="sequence"] .code-tooltip,
+.enable-diagrams pre.md-fences[lang="flow"] .code-tooltip,
+.enable-diagrams pre.md-fences[lang="mermaid"] .code-tooltip {
+    bottom: -3.4em;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+}
+
+li {
+	margin: 0.5rem 0;
+}
+
+li > *:last-child {
+	margin-bottom: 0;
+}</style>
+<style type='text/css'  id="style-lp">ol, ul {padding-left: 40px}</style>
+
+<title>热点夜话：不一样的家人</title>
+</head>
+<body class='typora-export os-windows typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
+<div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#热点夜话不一样的家人">热点夜话：不一样的家人</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#摘要">摘要</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#亮点">亮点</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#思考">思考</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#术语解释">术语解释</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#视频章节总结-｜-宠物经济崛起万亿市场的社会洞察与公职思维课">视频章节总结 ｜ 宠物经济崛起：万亿市场的社会洞察与公职思维课</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#0000---📢-课程开场与学习心态">00:00 - 📢 课程开场与学习心态</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#0201---🐾-现象观察宠物消费升级的夸张案例">02:01 - 🐾 现象观察：宠物消费升级的夸张案例</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#1017---📊-数据透视万亿市场的崛起">10:17 - 📊 数据透视：万亿市场的崛起</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#1144---🔍-深度分析逆势增长的三大原因">11:44 - 🔍 深度分析：逆势增长的三大原因</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#1748---✅-积极意义个体经济与社会的多赢">17:48 - ✅ 积极意义：个体、经济与社会的多赢</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2313---⚠️-辩证思考潜在问题与隐忧">23:13 - ⚠️ 辩证思考：潜在问题与隐忧</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2904---💡-解决路径规范发展与探索社会价值">29:04 - 💡 解决路径：规范发展与探索社会价值</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#4002---💭-延伸探讨宠物热与婚育率的冷思考">40:02 - 💭 延伸探讨：宠物热与婚育率的冷思考</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#考公时政总结">考公时政总结</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一内容总结">一、内容总结</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#二核心要点提炼">二、核心要点提炼</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#三考公应用链接">三、考公应用链接</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一-申论素材">（一） 申论素材</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#二-面试热点">（二） 面试热点</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#三-常识判断">（三） 常识判断</a></div><ul class="outline-children"></ul></li></ul></li></ul></li></ul></li></div></div><div id='write'  class=''><h1 id='热点夜话不一样的家人'><a href='https://bibigpt.co/new/video?url=https%3A%2F%2Fbibigpt-files.oss-cn-beijing.aliyuncs.com%2F74a8e93e-de11-4e71-99d8-53ae8caf7997%2F57KJ56yU6K--5aCCIOKAlCA05pyIMjDml6UgMjAgMTgtd2VibS1jb21wcmVzc2Vk.mp4%3FOSSAccessKeyId%3DLTAI5t7SY7MqvSzvdCxPSrEj%26Expires%3D1776697942%26Signature%3D9BlfNV78LgnoWL7CDcjtWJ6itiE%253D'><span>热点夜话：不一样的家人</span></a></h1><p><img src="https://bibigpt-files.oss-cn-beijing.aliyuncs.com/74a8e93e-de11-4e71-99d8-53ae8caf7997/57KJ56yU6K--5aCCIDTmnIgyMOaXpSAyMCAxOA==.jpg"></p><p>&nbsp;</p><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" href="#热点夜话不一样的家人">热点夜话：不一样的家人</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n5"><a class="md-toc-inner" href="#摘要">摘要</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n8"><a class="md-toc-inner" href="#亮点">亮点</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n28"><a class="md-toc-inner" href="#思考">思考</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n44"><a class="md-toc-inner" href="#术语解释">术语解释</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n55"><a class="md-toc-inner" href="#视频章节总结-｜-宠物经济崛起万亿市场的社会洞察与公职思维课">视频章节总结 ｜ 宠物经济崛起：万亿市场的社会洞察与公职思维课</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n57"><a class="md-toc-inner" href="#0000---📢-课程开场与学习心态">00:00 - 📢 课程开场与学习心态</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n59"><a class="md-toc-inner" href="#0201---🐾-现象观察宠物消费升级的夸张案例">02:01 - 🐾 现象观察：宠物消费升级的夸张案例</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n61"><a class="md-toc-inner" href="#1017---📊-数据透视万亿市场的崛起">10:17 - 📊 数据透视：万亿市场的崛起</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n63"><a class="md-toc-inner" href="#1144---🔍-深度分析逆势增长的三大原因">11:44 - 🔍 深度分析：逆势增长的三大原因</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n65"><a class="md-toc-inner" href="#1748---✅-积极意义个体经济与社会的多赢">17:48 - ✅ 积极意义：个体、经济与社会的多赢</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n67"><a class="md-toc-inner" href="#2313---⚠️-辩证思考潜在问题与隐忧">23:13 - ⚠️ 辩证思考：潜在问题与隐忧</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n69"><a class="md-toc-inner" href="#2904---💡-解决路径规范发展与探索社会价值">29:04 - 💡 解决路径：规范发展与探索社会价值</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n71"><a class="md-toc-inner" href="#4002---💭-延伸探讨宠物热与婚育率的冷思考">40:02 - 💭 延伸探讨：宠物热与婚育率的冷思考</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n74"><a class="md-toc-inner" href="#考公时政总结">考公时政总结</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n76"><a class="md-toc-inner" href="#一内容总结">一、内容总结</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n78"><a class="md-toc-inner" href="#二核心要点提炼">二、核心要点提炼</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n120"><a class="md-toc-inner" href="#三考公应用链接">三、考公应用链接</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n121"><a class="md-toc-inner" href="#一-申论素材">（一） 申论素材</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n139"><a class="md-toc-inner" href="#二-面试热点">（二） 面试热点</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n146"><a class="md-toc-inner" href="#三-常识判断">（三） 常识判断</a></span></p></div><p>&nbsp;</p><h3 id='摘要'><span>摘要</span></h3><p><span>本节课由老赵为大家深入解读“宠物经济”现象。课程不仅系统分享了宠物行业快速崛起的市场数据，更从公职人员的视角出发，深度剖析了该业态背后的社会成因、经济价值及潜在的人宠矛盾。我们重点探讨了如何通过规范管理、引导心理健康以及挖掘宠物业态的社会公用价值来推动行业可持续发展，旨在帮助学员构建看待社会热点的辩证思维与逻辑框架。</span></p><h3 id='亮点'><span>亮点</span></h3><ul><li><p><span>宠物行业市场规模已突破3000亿元，预计到2028年将迈入万亿俱乐部，其增速之快令许多行业望尘莫及 [05:53]。</span></p></li><li><p><span>消费观念的迭代是宠物经济崛起的核心，当代年轻人不再仅为实用性买单，更愿意为能够带来愉悦感的“情绪价值”付费 [14:08]。</span></p></li><li><p><span>城镇化进程导致家庭规模小型化，空巢老人和独居青年增多，宠物已从看家护院的角色转变为了关键的家庭情感伴侣 [12:30]。</span></p></li><li><p><span>宠物经济的发展正推动人才供给的专业化，中国农业大学开设“陪伴动物医学”专业，标志着该行业正向科学化管理迈进 [20:15]。</span></p></li><li><p><span>面对犬吠扰民、遛狗不牵绳等现实矛盾，宠物幼儿园等专业机构通过行为训练，在一定程度上缓解了邻里冲突，助力社区和谐 [22:27]。</span></p></li><li><p><span>针对市场监管盲区，应建议市场监管及农业部门制定行业标准、安全规范及从业人员资格认证体系，让新兴职业走向合规化 [30:04]。</span></p></li><li><p><span>需警惕过度“拟人化”带来的情感异化，宠物虽能提供无条件的爱，但不应成为逃避现实人际关系的唯一避风港 [26:38]。</span></p></li><li><p><span>挖掘宠物服务的社会公共属性，如在突发公共卫生事件或灾害中，利用宠物设施作为应急安置点，是该业态极具探索潜力的未来价值 [38:15]。</span></p></li></ul><p><a href='https://bibigpt.co/search?q=%E5%AE%A0%E7%89%A9%E7%BB%8F%E6%B5%8E'><span>#宠物经济</span></a><span> </span><a href='https://bibigpt.co/search?q=%E5%85%AC%E8%80%83%E9%9D%A2%E8%AF%95'><span>#公考面试</span></a><span> </span><a href='https://bibigpt.co/search?q=%E6%83%85%E7%BB%AA%E4%BB%B7%E5%80%BC'><span>#情绪价值</span></a><span> </span><a href='https://bibigpt.co/search?q=%E7%A4%BE%E4%BC%9A%E6%B2%BB%E7%90%86'><span>#社会治理</span></a></p><h3 id='思考'><span>思考</span></h3><ol start='' ><li><p><strong><a href='https://bibigpt.co/search?q=%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%B9%B4%E8%BD%BB%E4%BA%BA%E6%9B%B4%E5%80%BE%E5%90%91%E4%BA%8E%E2%80%9C%E7%A9%B7%E5%85%BB%E8%87%AA%E5%B7%B1%EF%BC%8C%E5%AF%8C%E5%85%BB%E5%AE%A0%E7%89%A9%E2%80%9D%EF%BC%9F'><span>为什么说现在的年轻人更倾向于“穷养自己，富养宠物”？</span></a></strong></p><ul><li><p><span>年轻人面临较大的职场与社会压力，相比于回报率不确定的自身改善型消费，宠物能提供即时、无条件且纯粹的情绪回馈，是当代年轻人性价比极高的“情感疗愈”方式。</span></p></li></ul></li></ol><ul><li><ol start='2' ><li><p><strong><a href='https://bibigpt.co/search?q=%E9%9D%A2%E5%AF%B9%E5%AE%A0%E7%89%A9%E7%BB%8F%E6%B5%8E%E4%B8%AD%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E7%9A%84%E4%B9%B1%E8%B1%A1%EF%BC%8C%E6%94%BF%E5%BA%9C%E5%BA%94%E5%A6%82%E4%BD%95%E7%9B%91%E7%AE%A1%EF%BC%9F'><span>面对宠物经济中可能存在的乱象，政府应如何监管？</span></a></strong></p></li></ol><ul><li><p><span>政府应建立从业人员职业资格认证体系，制定统一的行业服务与安全标准。同时，应出台政策引导企业承担社会责任，将商业运营与社区公益（如文明养犬宣传、流浪动物中转站）相结合，实现平级两用。</span></p></li></ul></li></ul><h3 id='术语解释'><span>术语解释</span></h3><ul><li><p><strong><span>原子化社会</span></strong><span>: 指现代社会中，人与人之间纽带松散，缺乏深度联结和传统家庭结构支撑，每个人如同孤立的“原子”，导致孤独感增加，进而通过宠物寻求情感寄托。</span></p></li><li><p><strong><span>情绪价值</span></strong><span>: 指产品或服务能给用户带来愉悦、安全、治愈等情感体验的能力，是当代年轻人消费决策的重要驱动力，区别于传统的“实用主义”。</span></p></li><li><p><strong><span>情感异化</span></strong><span>: 表现为将本应投射在人身上的情感过度依赖于宠物，甚至通过养宠来回避真实的人际交往，这在一定程度上阻碍了正常的社会化发展。</span></p></li><li><p><strong><span>平级两用</span></strong><span>: 指商业服务设施在日常经营（盈利）与紧急状态（应急/公益）下均能发挥社会价值，如宠物医院或幼儿园在平时提供服务，在灾难时可转化为应急安置点。</span></p></li></ul><hr /><h2 id='视频章节总结-｜-宠物经济崛起万亿市场的社会洞察与公职思维课'><span>视频章节总结 ｜ 宠物经济崛起：万亿市场的社会洞察与公职思维课</span></h2><p><span>本视频课程以宠物经济为切入点，深入探讨了这一新兴消费现象背后的社会、经济和文化动因。主讲人赵博通过分享宠物衣食住行消费升级的生动案例（如千元狗雨衣、高端宠物食品、智能宠物仓、宠物殡葬及宠物幼儿园），揭示了宠物市场规模已突破3000亿并向万亿级迈进的惊人事实。课程核心旨在培养公职人员及面试考生的社会洞察力与辩证思维，不仅分析了宠物经济满足情感需求、创造就业、促进社区和谐等积极意义，也警示了市场乱象、情感异化等潜在问题。最后，课程升华至探索新业态社会价值的公职人员思维，提出通过“平急两用”等方式，引导宠物经济健康可持续发展，使其产生更广泛的社会公共价值。</span></p><h3 id='0000---📢-课程开场与学习心态'><a href='https://bibigpt.co/content/cc6d553a-c13c-44bb-b077-b66f3c71e24b?t=0.000'><span>00:00</span></a><span> - 📢 课程开场与学习心态</span></h3><p><span>主讲人赵博（老赵）以轻松亲切的方式开场，鼓励学员放松听课，不必记笔记，因为课程重点在于知识分享和思维培养，而非死记硬背。他强调学习热点课程的核心在于积累社会知识和构建看待问题的思考方向，这比背诵更重要。课程将分为“热点解读”和“交心化”两个阶段，旨在分享知识并探讨一些可能不完全适用于考场但富有启发性的内容。</span></p><h3 id='0201---🐾-现象观察宠物消费升级的夸张案例'><a href='https://bibigpt.co/content/cc6d553a-c13c-44bb-b077-b66f3c71e24b?t=121.000'><span>02:01</span></a><span> - 🐾 现象观察：宠物消费升级的夸张案例</span></h3><p><span>本章节通过一系列生动具体的案例，展示了宠物经济中令人咋舌的消费升级现象。从狗穿的千元级日本品牌雨衣、吃的包含三文鱼、袋鼠肉的高端定制餐，到售价数千元的智能宠物仓，宠物的生活品质在许多方面已超越普通人。更具冲击力的服务业案例包括：宠物可乘坐客舱的高价机票、专业的宠物写真摄影，以及耗资两千万建成、提供全套殡葬服务的“时光之秋”宠物殡葬中心。这些案例直观地呈现了宠物消费从实体商品向高端服务延伸的惊人态势。</span></p><h3 id='1017---📊-数据透视万亿市场的崛起'><a href='https://bibigpt.co/content/cc6d553a-c13c-44bb-b077-b66f3c71e24b?t=617.000'><span>10:17</span></a><span> - 📊 数据透视：万亿市场的崛起</span></h3><p><span>在展示了现象之后，课程用权威数据揭示了宠物经济的庞大规模和增长潜力。根据《2026年中国宠物行业白皮书》，猫狗宠物市场规模已突破3126亿元，超过了人类保健品市场。艾媒咨询预测，到2028年，市场规模将突破1万亿元，成为又一个“万亿俱乐部”行业。从数量上看，中国城镇猫狗总数达1.26亿只，与日本人口总数相当。这些数据有力地证明了宠物经济并非小众消费，而是一个体量巨大、增长迅猛的国民经济组成部分。</span></p><h3 id='1144---🔍-深度分析逆势增长的三大原因'><a href='https://bibigpt.co/content/cc6d553a-c13c-44bb-b077-b66f3c71e24b?t=704.000'><span>11:44</span></a><span> - 🔍 深度分析：逆势增长的三大原因</span></h3><p><span>课程深入剖析了在经济下行周期中，宠物经济反而逆势增长的核心原因。首先，是家庭结构小型化与情感需求：单身青年、空巢老人等“一人家庭”增多，宠物从看家护院的角色转变为情感伴侣，其陪伴具有科学依据的治愈效果。其次，是消费主力军（80、90、00后）的观念迭代：年轻人更愿意为“情绪价值”买单，出现了“穷养自己，富养宠物”的消费现象。最后，是市场无形的推手：商家通过制造“爱宠焦虑”和情感营销，不断刺激和扩大消费需求，推动了市场的滚雪球式发展。</span></p><h3 id='1748---✅-积极意义个体经济与社会的多赢'><a href='https://bibigpt.co/content/cc6d553a-c13c-44bb-b077-b66f3c71e24b?t=1068.000'><span>17:48</span></a><span> - ✅ 积极意义：个体、经济与社会的多赢</span></h3><p><span>本章节运用主体分析法，系统阐述了宠物经济的积极意义。对个体而言，它满足了养宠人士的情感刚需，解决了上班族的后顾之忧，提升了生活幸福感。对经济而言，它催生了新的经济增长点和庞大的产业链，创造了大量就业岗位，甚至推动了中国农业大学设立首个宠物相关的本科专业，使行业走向专业化。对社会而言，规范的宠物服务（如宠物幼儿园）能通过训练减少犬吠扰民、随地大小便等人宠矛盾，用市场化手段助力社区治理，促进社会和谐。</span></p><h3 id='2313---⚠️-辩证思考潜在问题与隐忧'><a href='https://bibigpt.co/content/cc6d553a-c13c-44bb-b077-b66f3c71e24b?t=1393.000'><span>23:13</span></a><span> - ⚠️ 辩证思考：潜在问题与隐忧</span></h3><p><span>课程强调公职人员需具备辩证思维，指出了宠物经济繁荣背后潜在的问题。一方面是市场乱象：行业爆发式增长导致缺乏准入门槛和统一标准，服务纠纷、责任认定难、消费者维权成本高等问题突出。另一方面是更深层次的社会心理问题——“情感异化”。过度拟人化和情感投射可能导致部分人群将本应寄托于人际的情感过度转移到宠物身上，产生社交回避倾向，加剧原子化社会的人际关系疏离，这是需要警惕的极端倾向。</span></p><h3 id='2904---💡-解决路径规范发展与探索社会价值'><a href='https://bibigpt.co/content/cc6d553a-c13c-44bb-b077-b66f3c71e24b?t=1744.000'><span>29:04</span></a><span> - 💡 解决路径：规范发展与探索社会价值</span></h3><p><span>在提出对策部分，课程首先给出了常规思路：针对市场乱象，需完善法规、制定标准、建立从业人员资格认证体系；针对情感异化，需加强社会心理服务引导。随后，课程提出了一个核心的“六星重点”观点——公职人员必须具备“探索社会价值”的思维。即任何新业态要想长远发展，不能仅追求盈利，必须找到其社会公共价值的“最大公约数”。例如，宠物服务机构可以与政府合作，承担文明养宠宣传、流浪动物中转等社会责任，甚至在突发公共事件时作为宠物临时的“平急两用”安置点，从而获得更广泛的社会接纳与支持。</span></p><h3 id='4002---💭-延伸探讨宠物热与婚育率的冷思考'><a href='https://bibigpt.co/content/cc6d553a-c13c-44bb-b077-b66f3c71e24b?t=2402.000'><span>40:02</span></a><span> - 💭 延伸探讨：宠物热与婚育率的冷思考</span></h3><p><span>在最后的“星夜夜话”环节，课程探讨了一个不适合考场但引人深思的话题：宠物经济是否侵蚀了婚育率？主讲人指出，这是一种“因果倒置”的逻辑谬误。并非因为养宠物而不生孩子，而是社会压力大、养育成本高、年轻人时间被剥夺，导致许多人难以步入婚育，才转向宠物寻求情感替代。课程以韩国“超少子化”社会和“无儿童区”现象为镜鉴，警示我们应关注年轻人面临的现实困境，如社会财富分配不均、休息时间被侵占等根源性问题，而非简单地将宠物视为生育的竞争对手。最后，主讲人寄语养宠人士：不负信任、理性消费、不拒绝拥抱正常生活的多样可能。</span></p><hr /><h2 id='考公时政总结'><a href='https://bibigpt.co/new/video?url=https%3A%2F%2Fbibigpt-files.oss-cn-beijing.aliyuncs.com%2F74a8e93e-de11-4e71-99d8-53ae8caf7997%2F57KJ56yU6K--5aCCIOKAlCA05pyIMjDml6UgMjAgMTgtd2VibS1jb21wcmVzc2Vk.mp4%3FOSSAccessKeyId%3DLTAI5t7SY7MqvSzvdCxPSrEj%26Expires%3D1776697942%26Signature%3D9BlfNV78LgnoWL7CDcjtWJ6itiE%253D&amp;tab=custom-33903107-a5d7-47df-a9b5-70ca0e89699d'><span>考公时政总结</span></a></h2><p><span>好的，根据您提供的视频转录稿，我将为您进行内容总结、要点提炼和考公应用分析。</span></p><h3 id='一内容总结'><span>一、内容总结</span></h3><p><span>本课程以“宠物经济”这一社会热点为切入点，深度剖析了其从衣食住行到幼儿园、殡葬等拟人化服务爆发式增长的现状。核心论点是，宠物经济的崛起源于社会家庭结构小型化、年轻人消费观念转型（追求情绪价值）以及资本市场的推波助澜。课程不仅分析了该现象满足情感需求、创造经济增长点和就业岗位的积极意义，也辩证地指出了其带来市场失序和情感异化的隐患。最后，课程从公考思维出发，提出了完善法规、引导心理健康，尤其是“探索社会价值”这一核心对策，主张通过赋予商业机构公共职能（如平急两用、文明养犬宣传）来实现业态的良性发展与广泛接纳。</span></p><h3 id='二核心要点提炼'><span>二、核心要点提炼</span></h3><p><span>由于视频内容为时政热点分析，现按此方向提炼：</span></p><ul><li><p><strong><span>现象描述</span></strong><span>：</span>
+<span>中国“宠物经济”或“他经济”呈现井喷式发展，市场规模突破3000亿，城镇猫犬数量超1.26亿。消费已从基础粮、窝拓展到高端服饰、精密智能设备，并延伸到宠物幼儿园、宠物写真、宠物殡葬（如“时光之秋”）等深度拟人化服务领域。</span></p></li><li><p><strong><span>原因分析</span></strong><span>：</span></p><ol start='' ><li><p><strong><span>社会结构变革</span></strong><span>：城市化进程中，“一人家庭”（单身青年、空巢老人）增多，传统大家庭情感支撑减弱，宠物成为填补情感空缺的“家人”。</span></p></li><li><p><strong><span>消费观念迭代</span></strong><span>：80、90、00后成为消费主力，消费理念从追求“实用”转向购买“情绪价值”，愿意“穷养自己，富养宠物”，将宠物视为情感寄托。</span></p></li><li><p><strong><span>资本与营销驱动</span></strong><span>：商家通过制造焦虑（如宠物文学）等方式，持续激发宠主的消费欲望，推动市场滚雪球式扩张。</span></p></li></ol></li><li><p><strong><span>影响分析</span></strong><span>：</span></p><ul><li><p><strong><span>积极影响</span></strong><span>：</span></p><ul><li><p><strong><span>个体层面</span></strong><span>：满足爱宠人士的情感需求，缓解职场压力，提供治愈性陪伴。</span></p></li><li><p><strong><span>经济层面</span></strong><span>：开辟了万亿级的新经济增长点，催生了宠物训练师、宠物医生等新就业形态和职业，带动产业链延伸。</span></p></li><li><p><strong><span>社会层面</span></strong><span>：专业的宠物服务机构（如幼儿园）能通过行为矫正，缓解犬吠扰民等“人宠矛盾”，以市场化手段助力社区治理。</span></p></li></ul></li><li><p><strong><span>消极影响</span></strong><span>：</span></p><ul><li><p><strong><span>市场失序</span></strong><span>：行业井喷式发展导致监管滞后，鱼龙混杂，安全事故责任认定难，消费维权成本高。</span></p></li><li><p><strong><span>情感异化</span></strong><span>：过度渲染宠物拟人化，可能导致年轻人将全部情感投射于宠物，产生社交回避，影响正常人际关系和家庭生育意愿。</span></p></li></ul></li></ul></li><li><p><strong><span>对策建议</span></strong><span>：</span></p><ol start='' ><li><p><strong><span>完善法规标准</span></strong><span>：监管部门联合行业协会出台管理规范，明确准入门槛、服务标准及从业人员资格认证体系，填补监管盲区。</span></p></li><li><p><strong><span>引导理性观念</span></strong><span>：社会心理服务站等基层组织主动介入，为过度依赖宠物者提供社交渠道，警惕情感异化，构建多元情感支撑网络。</span></p></li><li><p><strong><span>探索社会价值（核心对策）</span></strong><span>：政府通过政策扶持，引导宠物服务企业承担公共职能，平时作为“文明养犬宣传站”或“流浪动物中转站”，急时（如疫情防控、自然灾害）可转化为“宠物临时安置点”，实现“平急两用”，提升其社会公信力与接纳度。</span></p></li></ol></li></ul><h3 id='三考公应用链接'><span>三、考公应用链接</span></h3><h4 id='一-申论素材'><span>（一） 申论素材</span></h4><ul><li><p><strong><span>规范表述</span></strong><span>：</span></p><ul><li><p><strong><span>用于“保障和改善民生”或“基层治理”主题</span></strong><span>：“关注‘一人家庭’背后的情感刚需，需以社会化服务弥补传统家庭功能弱化带来的真空。”</span></p></li><li><p><strong><span>用于“经济新业态”或“稳就业”主题</span></strong><span>：“以规范化、专业化引导‘他经济’健康发展，使其成为吸纳就业、延伸产业链的新兴增长点，催生宠物殡葬师、行为训练师等新职业。”</span></p></li><li><p><strong><span>用于“社会文明”或“辩证施政”主题</span></strong><span>：“警惕过度拟人化导致的‘情感异化’现象，引导民众在享受宠物陪伴的同时，不拒绝拥抱正常的社交与家庭生活。”</span></p></li></ul></li><li><p><strong><span>典型案例/金句</span></strong><span>：</span></p><ul><li><p><strong><span>探索社会价值的“平急两用”思维</span></strong><span>：“在城市应急管理体系建设中，可探索将宠物医院、宠物幼儿园等社会机构，纳入‘平急两用’体系，平时提供市场化服务，急时转换为饲主隔离或受灾后的宠物临时安置点，体现城市治理的温情与精细度。”</span></p></li><li><p><strong><span>因果倒置论的批判</span></strong><span>：“‘养宠侵蚀婚育率’是一种典型的因果倒置。实则是婚育成本高企、生活压力巨大等结构性难题，促使年轻人退而求其次，选择更低成本的宠物陪伴。解决问题，根源在于减负，而非禁宠。”</span></p></li></ul></li></ul><h4 id='二-面试热点'><span>（二） 面试热点</span></h4><p><span>该内容极有可能成为结构化面试的综合分析类考题。模拟问题如下：</span></p><ul><li><p><strong><span>模拟问题1</span></strong><span>：“近年来，宠物幼儿园、宠物写真、宠物殡葬等拟人化服务悄然兴起，有的收费甚至高达上万元，引发社会热议。有人认为是消费升级和情感需求的体现，也有人认为是过度消费和情感异化。对此，你怎么看？”</span></p></li><li><p><strong><span>模拟问题2</span></strong><span>：“你市计划引入社会资本，开办一家社区宠物日托服务中心，以解决双职工家庭上班后宠物独处的难题。但部分居民担心噪音、卫生和安全问题，联名提出反对。作为社区工作人员，你将如何协调处理此事？”</span></p></li></ul><h4 id='三-常识判断'><span>（三） 常识判断</span></h4><ul><li><p><strong><span>市场经济常识</span></strong><span>：理解“市场主体趋利性”与“政府宏观调控”的关系。新业态发展过快必然导致市场失灵，需要政府这双“看得见的手”通过制定标准、加强监管来纠偏。</span></p></li><li><p><strong><span>社会治理常识</span></strong><span>：掌握“社会共治”的概念。解决社会问题不能单靠政府，要引导企业、社会组织、社区居民共同参与。例如，让宠物企业承担社区文明养犬宣传的公共责任，就是社会共治的体现。</span></p></li><li><p><strong><span>产业经济常识</span></strong><span>：可适当记忆“银发经济”“她经济”“他经济（宠物经济）”等由特定消费群体拉动的大型市场板块，作为宏观背景储备。了解一个千亿级市场的崛起，对拉动GDP和就业的宏观意义。</span></p></li></ul></div></div>
+
+<script>(function(){function e(e,n,i){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var t=e.target;t&&t!=this;t=t.parentNode)if(t.matches(n)){!1===i.call(t,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)}var t=document.body.parentElement,i=[],r=null,o=document.body.classList.contains("typora-export-collapse-outline");function a(){return t.scrollTop}e("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),u(),!1}),e("click",".outline-item",function(e){var t=this.querySelector(".outline-label");location.hash=t.getAttribute("href"),o&&((t=this.closest(".outline-item-wrapper").classList).contains("outline-item-open")||t.add("outline-item-open"),d(),t.add("outline-item-active"))});function s(){var e=a();r=null;for(var t=0;t<i.length&&i[t][1]-e<60;t++)r=i[t]}function n(){c=setTimeout(function(){var n;i=[],n=a(),document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(e=>{var t=e.getAttribute("id");i.push([t,n+e.getBoundingClientRect().y])}),s(),u()},300)}var l,c,d=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},u=function(){if(r&&(d(),t=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(r[0]):r[0])+'"]')))if(o){var e=t.closest(".outline-item-open>ul>.outline-item-wrapper");if(e)e.classList.add("outline-item-active");else{for(var t,n=(t=t.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");n;)n=(t=n).parentElement.closest(".outline-item-wrapper");t.classList.add("outline-item-active")}}else t.closest(".outline-item-wrapper").classList.add("outline-item-active")};window.addEventListener("scroll",function(e){l&&clearTimeout(l),l=setTimeout(function(){s(),u()},300)});window.addEventListener("resize",function(e){c&&clearTimeout(c),n()}),n()})();</script></body>
+</html>
