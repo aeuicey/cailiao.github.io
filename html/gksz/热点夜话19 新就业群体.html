@@ -1,0 +1,709 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'><style type='text/css'>html {overflow-x: initial !important;}</style>
+<style type='text/css'  id="style-base">:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, "Segoe UI Emoji", "SF Pro", sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p *, #write.first-line-indent svg * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; position: relative; }
+#write svg h1, #write svg h2, #write svg h3, #write svg h4, #write svg h5, #write svg h6, #write svg p { position: static; }
+svg sub, svg sup { position: static; }
+.nodeLabel p { padding-right: 2px; padding-left: 2px; }
+.typora-export .nodeLabel p { padding-right: 0px; padding-left: 0px; }
+foreignobject { overflow: visible; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+li p { orphans: 1; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.mermaid-svg { margin: auto; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left: 0.25em solid rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+</style>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic&amp;subset=latin-ext' type='text/css' />
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:900,300&amp;subset=latin-ext' type='text/css' />
+<style type='text/css'  id="style-theme_css">@include-when-export url(https://fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic&subset=latin-ext);
+@include-when-export url(https://fonts.googleapis.com/css?family=Lato:900,300&subset=latin-ext);
+
+:root {
+	--control-text-color: #777;
+}
+
+/**
+ * forked from pixyll.com
+ * MIT license
+ */
+
+h1,
+.h1,
+.f1 {
+	font-size: 2rem;
+	line-height: 2.5rem;
+}
+h2,
+.h2,
+.f2 {
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+h3,
+.h3,
+.f3 {
+	font-size: 1.25rem;
+	line-height: 1.5rem;
+}
+p,
+.p,
+.f4,
+h4,
+h5,
+h6,
+dl,
+ol,
+ul,
+pre[cid],
+div[cid],
+#typora-source {
+	font-size: 1.125rem;
+	line-height: 1.5rem;
+}
+
+h4 {
+	font-size: 1.13rem;
+}
+/*
+ Pixyll
+ A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff.
+ Best served with BASSCSS (http://jxnblk.github.io/basscss)
+ Crafted with <3 by John Otander (@4lpine) - ©2015 John Otander MIT License http://opensource.org/licenses/MIT
+
+*/
+
+body {
+	font-family: "Merriweather", "PT Serif", Georgia, "Times New Roman", "STSong", 'Segoe UI Emoji','SF Pro', Serif;
+	line-height: 1.5rem;
+	font-weight: 400;
+}
+
+#write {
+	max-width: 914px;
+	color: #333;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1100px;
+	}
+}
+
+@media only screen and (min-width: 1700px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+img {
+	width: auto;
+	max-width: 100%;
+}
+body {
+	font-size: 1.5rem;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.ty-table-edit {
+	background: #ededed;
+}
+
+table {
+	width: 100%;
+	font-size: 1.125rem;
+}
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td,
+table > tfoot > tr > th,
+table > tfoot > tr > td {
+	padding: 12px;
+	line-height: 1.2;
+	vertical-align: top;
+	border-top: 1px solid #333;
+}
+table > thead > tr > th {
+	vertical-align: bottom;
+	border-bottom: 2px solid #333;
+}
+table > caption + thead > tr:first-child > th,
+table > caption + thead > tr:first-child > td,
+table > colgroup + thead > tr:first-child > th,
+table > colgroup + thead > tr:first-child > td,
+table > thead:first-child > tr:first-child > th,
+table > thead:first-child > tr:first-child > td {
+	border-top: 0;
+}
+table > tbody + tbody {
+	border-top: 2px solid #333;
+}
+p {
+	font-weight: 300;
+	line-height: 1.5;
+}
+abbr {
+	border-bottom: 1px black dotted;
+	cursor: help;
+}
+pre,
+code {
+	font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
+code,
+.md-fences  {
+	color: #7a7a7a;
+}
+
+.md-fences {
+	padding: 1.125em;
+	margin-bottom: 0.88em;
+	font-size: 1rem;
+	border: 1px solid #7a7a7a;
+	padding-bottom: 0.5rem;
+	padding-top: 0.5rem;
+}
+
+blockquote {
+	padding: 1.33em;
+	font-style: italic;
+	border-left: 5px solid #7a7a7a;
+	color: #555;
+}
+blockquote em {
+	color: #000;
+}
+blockquote footer {
+	font-size: .85rem;
+	font-style: normal;
+	background-color: #fff;
+	color: #7a7a7a;
+	border-color: transparent;
+}
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+	font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: bold;
+	line-height: 1.2;
+	margin: 1em 0 0.5em;
+}
+@media screen and (min-width: 48em) {
+	.h1,
+	h1 {
+		font-size: 3.250rem;
+	}
+	.h2,
+	h2 {
+		font-size: 2.298rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.625rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.3rem;
+	}
+	#write>h4.md-focus:before,
+	#write>h5.md-focus:before,
+	#write>h6.md-focus:before{
+		top: 1px;
+	}
+	.p,
+	p,
+	li {
+		font-size: 1.25rem;
+		line-height: 1.8;
+	}
+	table {
+		font-size: 1.25rem;
+	}
+}
+@media (max-width: 48em) {
+	blockquote {
+		margin-left: 1rem;
+		margin-right: 0;
+		padding: 0.5em;
+	}
+	.h1,
+	h1 {
+		font-size: 2.827rem;
+	}
+	.h2,
+	h2 {
+		font-size: 1.999rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.413rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.3rem;
+	}
+}
+@media screen and (min-width: 64em) {
+	.h1,
+	h1 {
+		font-size: 4.498rem;
+	}
+	.h2,
+	h2 {
+		font-size: 2.29rem;
+	}
+	.h3,
+	h3 {
+		font-size: 1.9rem;
+	}
+	.h4,
+	h4 {
+		font-size: 1.591rem;
+	}
+	#write>h4.md-focus:before{
+		top:4px;
+	}
+}
+a {
+	color: #463F5C;
+	text-decoration: underline;
+}
+
+#write {
+	padding-top: 2rem;
+}
+
+#write pre.md-meta-block {
+	min-height: 35px;
+	padding: 0.5em 1em;
+	white-space: pre;
+	border: 0px;
+
+	border-left: 30px #f8f8f8 solid;
+	border-right: 30px #f8f8f8 solid;
+	width: 100vw;
+	max-width: calc(100% + 60px);
+
+	margin-left: -30px;
+	margin-bottom: 2em;
+	margin-top: -2010px;
+	padding-top: 2000px;
+	padding-bottom: 10px;
+	line-height: 1.5em;
+	color: #7a7a7a;
+	background-color: #fafafa;
+	font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: 300;
+	clear: both;
+	padding-left: 0;
+	font-size:1.125rem;
+}
+.md-image>.md-meta {
+	color: #463F5C
+}
+.footnotes {
+	font-size:1.1rem;
+}
+.md-tag {
+	font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif;
+}
+.code-tooltip {
+	background: white;
+}
+.code-tooltip-content {
+	font-size: 1.1rem;
+}
+
+.task-list{
+	padding-left: 0;
+}
+
+.md-task-list-item {
+	padding-left:34px;
+}
+
+.md-task-list-item > input{
+	width: 1.25rem;
+	height: 1.25rem;
+	display: block;
+	-webkit-appearance: initial;
+	top: -0.2rem;
+	margin-left: -1.6em;
+	margin-top: calc(1rem - 7px);
+	border: none;
+}
+
+.md-task-list-item > input:focus{
+	outline: none;
+	box-shadow: none;
+}
+
+.md-task-list-item > input:before{
+	border: 1px solid #555;
+	border-radius: 1.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	background: #fff;
+	content: ' ';
+	transition: background-color 200ms ease-in-out;
+	display: block;
+}
+
+.md-task-list-item > input:checked:before,
+.md-task-list-item > input[checked]:before{
+	background: #333;
+	border-width: 2px;
+	display:inline-block;
+	transition: background-color 200ms ease-in-out;
+}
+
+.md-task-list-item > input:checked:after,
+.md-task-list-item > input[checked]:after {
+	opacity: 1;
+}
+
+.md-task-list-item > input:after {
+	opacity: 1;
+	-webkit-transition: opacity 0.05s ease-in-out;
+	-moz-transition: opacity 0.05s ease-in-out;
+	transition: opacity 0.05s ease-in-out;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	position: absolute;
+	top: 0.4375rem;
+	left: 0.28125rem;
+	width: 0.9375rem;
+	height: 0.5rem;
+	border: 3px solid #fff;
+	border-top: 0;
+	border-right: 0;
+	content: ' ';
+	opacity: 0;
+}
+
+.md-tag {
+	color:inherit;
+}
+
+.md-toc:focus .md-toc-content{
+	margin-top: 19px;
+}
+
+#typora-sidebar {
+	font-size:1rem !important;
+}
+
+.html-for-mac #typora-sidebar {
+	background-color:white;
+}
+
+.outline-content li, .outline-content ul {
+	font-size:1rem !important;
+}
+
+.outline-title {
+	line-height: inherit;
+	margin-top: 10px;
+}
+
+.outline-expander {
+	width: 18px;
+}
+
+.outline-expander:before {
+ 	content: "+";
+	font-family: inherit;
+	color: rgb(108, 108, 108); 
+  font-size: 1.5rem;
+ 	top: -0.1rem;
+}
+
+.outline-expander:hover:before {
+	content: "+";
+}
+
+.outline-item-open>.outline-item>.outline-expander:before{
+	content: "-";
+}
+
+/** source code mode */
+#typora-source {
+	font-family: Courier, monospace;
+    color: #6A6A6A;
+}
+
+.os-windows #typora-source {
+	font-family: inherit;
+}
+
+.cm-s-typora-default .cm-header, 
+.cm-s-typora-default .cm-property,
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor {
+	color: #428bca;
+}
+
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number {
+	color: #777777;
+}
+
+.md-diagram-panel {
+	margin-top: 24px;
+	margin-left: -1.2em;
+}
+
+.md-mathjax-midline {
+	background: #fafafa;
+}
+
+.enable-diagrams pre.md-fences[lang="sequence"] .code-tooltip,
+.enable-diagrams pre.md-fences[lang="flow"] .code-tooltip,
+.enable-diagrams pre.md-fences[lang="mermaid"] .code-tooltip {
+    bottom: -3.4em;
+}
+
+.dropdown-menu .divider {
+	border-color: #e5e5e5;
+}
+
+li {
+	margin: 0.5rem 0;
+}
+
+li > *:last-child {
+	margin-bottom: 0;
+}</style>
+<style type='text/css'  id="style-lp">ol, ul {padding-left: 40px}</style>
+
+<title>热点夜话19 新就业群体</title>
+</head>
+<body class='typora-export os-windows typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
+<div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#热点夜话19-新就业群体">热点夜话19 新就业群体</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#视频章节总结-｜-公考高频热点深度解读新就业群体的现状痛点与对策">视频章节总结 ｜ 公考高频热点深度解读：新就业群体的现状、痛点与对策</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#0000---🔍-引入新就业群体高频热点与生活实例">00:00 - 🔍 引入新就业群体：高频热点与生活实例</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#0244---📊-新就业群体的定义与庞大规模">02:44 - 📊 新就业群体的定义与庞大规模</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#0646---💡-服务新就业群体的四大意义">06:46 - 💡 服务新就业群体的四大意义</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#1347---⚠️-新就业群体面临的核心痛点">13:47 - ⚠️ 新就业群体面临的核心痛点</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2038---🛠️-服务新就业群体的五大对策">20:38 - 🛠️ 服务新就业群体的五大对策</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2846---📝-应试技巧与课程总结">28:46 - 📝 应试技巧与课程总结</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#考公时政总结">考公时政总结</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一内容总结">一、内容总结</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#二核心要点提炼">二、核心要点提炼</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#三考公应用链接">三、考公应用链接</a></div><ul class="outline-children"></ul></li></ul></li></ul></li></div></div><div id='write'  class=''><h1 id='热点夜话19-新就业群体'><a href='https://bibigpt.co/new/video?url=https%3A%2F%2Fbibigpt-files.s3.oss-cn-beijing.aliyuncs.com%2F74a8e93e-de11-4e71-99d8-53ae8caf7997%2F54Ot54K55aSc6K-dMTkg5paw5bCx5Lia576k5L2TLW1wNC1lbmNvZGVk.mp3%3FX-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Content-Sha256%3DUNSIGNED-PAYLOAD%26X-Amz-Credential%3DLTAI5t7SY7MqvSzvdCxPSrEj%252F20260428%252Foss-cn-beijing%252Fs3%252Faws4_request%26X-Amz-Date%3D20260428T081524Z%26X-Amz-Expires%3D7200%26X-Amz-Signature%3D28e5a067d02e50f61e43314392b6df605d13f7228f8f020ca813a15032c58f2a%26X-Amz-SignedHeaders%3Dhost%26x-amz-checksum-mode%3DENABLED%26x-id%3DGetObject'><span>热点夜话19 新就业群体</span></a></h1><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" href="#热点夜话19-新就业群体">热点夜话19 新就业群体</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n44"><a class="md-toc-inner" href="#视频章节总结-｜-公考高频热点深度解读新就业群体的现状痛点与对策">视频章节总结 ｜ 公考高频热点深度解读：新就业群体的现状、痛点与对策</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n46"><a class="md-toc-inner" href="#0000---🔍-引入新就业群体高频热点与生活实例">00:00 - 🔍 引入新就业群体：高频热点与生活实例</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n49"><a class="md-toc-inner" href="#0244---📊-新就业群体的定义与庞大规模">02:44 - 📊 新就业群体的定义与庞大规模</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n52"><a class="md-toc-inner" href="#0646---💡-服务新就业群体的四大意义">06:46 - 💡 服务新就业群体的四大意义</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n55"><a class="md-toc-inner" href="#1347---⚠️-新就业群体面临的核心痛点">13:47 - ⚠️ 新就业群体面临的核心痛点</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n58"><a class="md-toc-inner" href="#2038---🛠️-服务新就业群体的五大对策">20:38 - 🛠️ 服务新就业群体的五大对策</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n61"><a class="md-toc-inner" href="#2846---📝-应试技巧与课程总结">28:46 - 📝 应试技巧与课程总结</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n65"><a class="md-toc-inner" href="#考公时政总结">考公时政总结</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n67"><a class="md-toc-inner" href="#一内容总结">一、内容总结</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n69"><a class="md-toc-inner" href="#二核心要点提炼">二、核心要点提炼</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n113"><a class="md-toc-inner" href="#三考公应用链接">三、考公应用链接</a></span></p></div><p><img src="https://bibigpt-apps.chatvid.ai/thumbnails/74a8e93e-de11-4e71-99d8-53ae8caf7997/54Ot54K55aSc6K-dMTkg5paw5bCx5Lia576k5L2T.jpg"></p><p><span>一、内容总结</span>
+<span>本期视频围绕近三年公考高频热点“新就业群体”展开，系统讲解了其定义、发展现状、重要意义、现实痛点及服务对策。主讲人指出，新就业群体是依托互联网平台就业的劳动者，如外卖员、网约车司机等，人数已达8400万，占全国职工总数21%，是稳就业的重要“蓄水池”。视频重点分析了服务新就业群体的四重意义：稳就业保民生、激活经济内生动力、彰显城市治理温度、促进社会公平正义。同时，剖析了其面临的劳动权益保障制度短板、金融服务缺位、城市融入困难等核心痛点。最后，从健全法治体系、优化普惠金融、完善公共服务、拓展职业发展通道、加强宣传引导等维度提出了具体对策，并强调在公务员考试中需结合“共赢思维”与具体举措进行作答。</span></p><ul><li><p><span>二、核心要点提炼</span></p></li><li><p><span>现象描述：新就业群体是指依托互联网平台实现就业的劳动者，主要涵盖快递员、外卖配送员、网约车司机、网络主播等。全国新就业形态劳动者总量约8400万人，占职工总数21%，已成为我国就业基本盘的重要组成部分。</span></p></li><li><p><span>原因分析：1. </span><strong><span>经济结构转型</span></strong><span>：数字经济与平台经济快速发展，催生了大量多元化、技术化的新业态岗位。2. </span><strong><span>就业观念转变</span></strong><span>：灵活自主的工作方式吸引了大量劳动者，使其成为就业“蓄水池”。3. </span><strong><span>技术赋能</span></strong><span>：互联网、AI等技术的普及，降低了部分技能岗位的从业门槛，也创造了新的就业机会。</span></p></li><li><p><span>影响分析：1. </span><strong><span>积极影响</span></strong><span>：缓解了就业总量压力，吸纳了大量劳动力；激活了服务型消费，扩大了内需；提升了城镇化质量，有助于培育中等收入群体；劳动者融入基层治理，提升了城市治理效能。2. </span><strong><span>消极影响</span></strong><span>：劳动者权益保障存在制度短板（如劳动关系认定模糊、参保门槛高、职业伤害维权难）；传统金融服务不适配其收入波动性强的特点，融资门槛高；城市公共服务覆盖度不够，群体归属感弱；部分岗位职业发展通道受限。</span></p></li><li><p><span>对策建议：1. </span><strong><span>健全法治体系</span></strong><span>：加快推进新就业形态劳动者权益保障相关法律法规出台，逐步实现职业伤害保障全覆盖，构建多部门协同监管机制。2. </span><strong><span>优化普惠金融</span></strong><span>：创新场景化的信用评价模型，用平台交易流水等替代传统工资流水，推出小额、高频、灵活存取的适配金融产品。3. </span><strong><span>完善公共服务</span></strong><span>：持续推进工会暖心驿站、劳动者之家建设，解决休息、充电等刚需；在住房、子女教育等方面强化供给，如推广“小哥公寓”、开通异地子女入学绿色通道。</span></p></li><li><p><span>三、考公应用链接</span></p></li><li><p><span>申论素材：</span></p><ul><li><p><span>金句/规范表述：1. “善待劳动者就是点亮城市未来”（共赢思维）。2. “一座城市的温度，往往体现在对普通劳动者的关怀上。”3. “让新就业群体贷得到、用得起。”4. “以民生温度护航新业态发展。”</span></p></li><li><p><span>典型案例：1. 北京工会设立“骑手驿站”，配备饮水机、微波炉等。2. 上海推出月租900元的“小哥公寓”。3. 鼓励外卖骑手担任“流动网格员”，参与基层治理。</span></p></li><li><p><strong><span>适用主题</span></strong><span>：这些素材可凝练后用于</span><strong><span>民生保障、稳就业、社会治理创新、城市温度、共同富裕</span></strong><span>等主题的申论写作中，可作为分论点论据或文章开头。</span></p></li></ul></li><li><p><span>面试热点：</span></p><ul><li><p><strong><span>判断</span></strong><span>：可能性极高。此内容属于民生与就业领域的交叉重点，是结构化面试中综合分析、计划组织、应急应变等题型的常见命题背景。</span></p></li><li><p><strong><span>模拟问题</span></strong><span>：</span></p><ol start='' ><li><p><span>当前，我国新就业形态劳动者数量已达8400万人，他们在为城市发展做出巨大贡献的同时，也面临着权益保障、城市融入等难题。对此，请谈谈你的看法。（综合分析类）</span></p></li><li><p><strong><a href='https://bibigpt.co/search?q=%E4%B8%BA%E4%BA%86%E5%A2%9E%E5%BC%BA%E5%A4%96%E5%8D%96%E9%AA%91%E6%89%8B%E3%80%81%E5%BF%AB%E9%80%92%E5%B0%8F%E5%93%A5%E7%AD%89%E6%96%B0%E5%B0%B1%E4%B8%9A%E7%BE%A4%E4%BD%93%E7%9A%84%E5%9F%8E%E5%B8%82%E5%BD%92%E5%B1%9E%E6%84%9F%EF%BC%8C%E6%9F%90%E5%B8%82%E8%AE%A1%E5%88%92%E5%BC%80%E5%B1%95%E4%B8%80%E7%B3%BB%E5%88%97%E5%85%B3%E7%88%B1%E6%9C%8D%E5%8A%A1%E6%B4%BB%E5%8A%A8%E3%80%82%E5%A6%82%E6%9E%9C%E4%BD%A0%E6%98%AF%E6%B4%BB%E5%8A%A8%E8%B4%9F%E8%B4%A3%E4%BA%BA%EF%BC%8C%E4%BD%A0%E4%BC%9A%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%EF%BC%9F'><span>为了增强外卖骑手、快递小哥等新就业群体的城市归属感，某市计划开展一系列关爱服务活动。如果你是活动负责人，你会如何组织？</span></a></strong><span>（计划组织类）</span></p></li></ol></li></ul></li><li><p><span>常识判断：</span></p><ul><li><p><strong><span>数据与概念</span></strong><span>：1. </span><strong><span>全国新就业形态劳动者总量：8400万人</span></strong><span>，占职工总数21%。2. </span><strong><span>新就业群体定义</span></strong><span>：依托互联网平台就业的劳动者。3. </span><strong><span>普惠金融</span></strong><span>：指立足机会平等要求和商业可持续原则，以可负担的成本为有金融服务需求的社会各阶层和群体提供适当、有效的金融服务。4. </span><strong><span>流动网格员</span></strong><span>：基层治理的创新举措，引导新就业群体在工作中发现并上报城市管理、安全隐患等问题，参与共建共治。</span></p></li></ul></li></ul><hr /><h2 id='视频章节总结-｜-公考高频热点深度解读新就业群体的现状痛点与对策'><span>视频章节总结 ｜ 公考高频热点深度解读：新就业群体的现状、痛点与对策</span></h2><p><span>本课程围绕公考高频热点“新就业群体”展开，从定义、重要性、意义、痛点及对策等多维度进行剖析。新就业群体指依托互联网平台就业的劳动者，包括快递员、外卖员、网约车司机等，总数达8400万人，占职工总数21%。课程强调服务新就业群体是稳就业、保民生的核心支撑，也是激活经济内生动力、提升城市治理能力、促进社会公平的重要抓手。同时指出该群体面临劳动权益保障不足、金融服务缺失、城市融入度低等痛点，并提出健全法治体系、优化普惠金融、完善公共服务、强化职业技能培训、加强宣传引导等务实对策。课程旨在帮助考生掌握民生、就业、社会治理交叉的高频考点，积累素材，提升应试能力。</span></p><h3 id='0000---🔍-引入新就业群体高频热点与生活实例'><a href='https://bibigpt.co/content/9bbf7156-8249-40b7-83d2-61352197593a?t=0.000'><span>00:00</span></a><span> - 🔍 引入新就业群体：高频热点与生活实例</span></h3><p><img src="https://asset.localhost/C%3A%5CUsers%5CVertin%5CAppData%5CLocal%5Cco.bibigpt.desktop%5Cscreenshots%5Cvideo_927937835408918346%5Cscreenshot_0.0s.jpg" alt="章节截图 00:00"></p><p><span>课程开场指出“新就业群体”是公考反复出现的高频热点。通过提问互动，列举外卖小哥、快递员、网约车司机、网络主播、家政服务人员等常见角色，结合北京工会骑手驿站和上海小哥公寓的真实案例，直观展现城市对这一群体的关怀。这些案例不仅体现城市温度，也点明了本课主题——新就业群体的重要性及其在考试中的地位。</span></p><h3 id='0244---📊-新就业群体的定义与庞大规模'><a href='https://bibigpt.co/content/9bbf7156-8249-40b7-83d2-61352197593a?t=164.060'><span>02:44</span></a><span> - 📊 新就业群体的定义与庞大规模</span></h3><p><img src="https://asset.localhost/C%3A%5CUsers%5CVertin%5CAppData%5CLocal%5Cco.bibigpt.desktop%5Cscreenshots%5Cvideo_927937835408918346%5Cscreenshot_164.1s.jpg" alt="章节截图 02:44"></p><p><span>本节给出官方定义：新就业群体主要指依托互联网平台就业的劳动者，核心包含快递员、外卖配送员、网约车司机、家政服务等，且随着数字经济和AI发展，延伸至电商营销、视频制作、在线咨询等技能型岗位。数据显示，全国新就业形态劳动者达8400万人，占职工总数21%，若加上灵活就业人员，总数超2亿，相当于每五个劳动者中就有一个新就业形态劳动者，足见其对稳就业的支撑作用。</span></p><h3 id='0646---💡-服务新就业群体的四大意义'><a href='https://bibigpt.co/content/9bbf7156-8249-40b7-83d2-61352197593a?t=406.250'><span>06:46</span></a><span> - 💡 服务新就业群体的四大意义</span></h3><p><img src="https://asset.localhost/C%3A%5CUsers%5CVertin%5CAppData%5CLocal%5Cco.bibigpt.desktop%5Cscreenshots%5Cvideo_927937835408918346%5Cscreenshot_406.2s.jpg" alt="章节截图 06:46"></p><p><span>课程从民生、经济、治理、社会四个维度阐述服务新就业群体的重大意义。民生上，它是稳就业、保民生的核心蓄水池，可缓解就业结构性矛盾；经济上，该群体带动高频服务型消费，促进收入增长和消费升级，激活内生动力；治理上，服务他们能彰显城市温度、优化营商环境，创新引导其融入基层治理，如鼓励骑手担任流动网格员；社会上，补齐保障短板、维护合法权益，有助于实现共同富裕和公平正义。</span></p><h3 id='1347---⚠️-新就业群体面临的核心痛点'><a href='https://bibigpt.co/content/9bbf7156-8249-40b7-83d2-61352197593a?t=827.730'><span>13:47</span></a><span> - ⚠️ 新就业群体面临的核心痛点</span></h3><p><img src="https://asset.localhost/C%3A%5CUsers%5CVertin%5CAppData%5CLocal%5Cco.bibigpt.desktop%5Cscreenshots%5Cvideo_927937835408918346%5Cscreenshot_827.7s.jpg" alt="章节截图 13:47"></p><p><span>本节聚焦新就业群体的四大困境。首先是劳动权益保障制度短板，劳动关系认定模糊导致参保门槛高、维权难，外卖骑手等面临职业伤害无保可赔的窘境。其次是金融服务缺失，收入波动大、传统信用评价模式不适用，融资难、适配金融产品少，劳动者也易受电信诈骗。再次是城市融入度低，公共服务覆盖不足，如休息如厕、充电等基本需求难以满足，住房、子女教育等更遥不可及。最后还提及监管体系不完备和职业发展通道狭窄等问题。</span></p><h3 id='2038---🛠️-服务新就业群体的五大对策'><a href='https://bibigpt.co/content/9bbf7156-8249-40b7-83d2-61352197593a?t=1238.050'><span>20:38</span></a><span> - 🛠️ 服务新就业群体的五大对策</span></h3><p><img src="https://asset.localhost/C%3A%5CUsers%5CVertin%5CAppData%5CLocal%5Cco.bibigpt.desktop%5Cscreenshots%5Cvideo_927937835408918346%5Cscreenshot_1238.0s.jpg" alt="章节截图 20:38"></p><p><span>针对痛点，课程提出系统性对策：一是健全法治体系，推进新就业形态劳动者权益保障立法，实现职业伤害保障全覆盖，构建多部门协同监管机制；二是优化普惠金融，创新场景化信用评价模型，推出小额高频、灵活存取的适配金融产品；三是完善公共服务，持续建设暖心驿站、劳动者之家，强化住房、教育、医疗等供给，如推广小哥公寓、开通异地子女入学绿色通道；四是强化职业技能培训，构建终身培训体系，打通低技能岗位向技术型岗位的上升通道；五是加强宣传引导，营造尊重劳动者的社会氛围，并通过趣味化方式提升群体的金融素养、反诈意识。</span></p><h3 id='2846---📝-应试技巧与课程总结'><a href='https://bibigpt.co/content/9bbf7156-8249-40b7-83d2-61352197593a?t=1726.800'><span>28:46</span></a><span> - 📝 应试技巧与课程总结</span></h3><p><img src="https://asset.localhost/C%3A%5CUsers%5CVertin%5CAppData%5CLocal%5Cco.bibigpt.desktop%5Cscreenshots%5Cvideo_927937835408918346%5Cscreenshot_1726.8s.jpg" alt="章节截图 28:46"></p><p><span>最后，课程总结新就业群体贯穿民生、就业、社会治理三大公考主线，并给出笔试和面试的应试技巧：笔试中善用8400万人等数据、暖心驿站等案例作为大作文亮点；面试中对策要具体化，如推进职业伤害保障全覆盖、推动平台算法透明化，避免空喊口号。课程以温情寄语结尾，希望考生不仅掌握答题技巧，更能带着对劳动者的敬意去思考和作答。</span></p><hr /><h2 id='考公时政总结'><a href='https://bibigpt.co/new/video?url=https%3A%2F%2Fbibigpt-files.s3.oss-cn-beijing.aliyuncs.com%2F74a8e93e-de11-4e71-99d8-53ae8caf7997%2F54Ot54K55aSc6K-dMTkg5paw5bCx5Lia576k5L2TLW1wNC1lbmNvZGVk.mp3%3FX-Amz-Algorithm%3DAWS4-HMAC-SHA256%26X-Amz-Content-Sha256%3DUNSIGNED-PAYLOAD%26X-Amz-Credential%3DLTAI5t7SY7MqvSzvdCxPSrEj%252F20260428%252Foss-cn-beijing%252Fs3%252Faws4_request%26X-Amz-Date%3D20260428T081524Z%26X-Amz-Expires%3D7200%26X-Amz-Signature%3D28e5a067d02e50f61e43314392b6df605d13f7228f8f020ca813a15032c58f2a%26X-Amz-SignedHeaders%3Dhost%26x-amz-checksum-mode%3DENABLED%26x-id%3DGetObject&amp;tab=custom-33903107-a5d7-47df-a9b5-70ca0e89699d'><span>考公时政总结</span></a></h2><p><span>好的，这是根据您提供的视频转录内容整理的结构化分析：</span></p><h3 id='一内容总结'><span>一、内容总结</span></h3><p><span>本视频聚焦于公务员考试高频热点“新就业群体”，系统阐述了其定义、重要性、面临困境及解决对策。主讲人指出，依托互联网平台就业的劳动者（如快递员、外卖员、网约车司机等）已成为我国就业基本盘的重要组成部分，总量达8400万人。服务好这一群体，是稳就业保民生的核心支撑、激活经济内生动力的引擎、提升城市治理能力的关键，也是促进社会公平正义的体现。针对其劳动权益保障不足、金融服务欠缺、城市融入度低等痛点，视频提出了健全法治体系、优化普惠金融、完善公共服务、拓展职业发展通道等具体对策，旨在为考生提供申论写作和面试答题的实用素材与答题技巧。</span></p><h3 id='二核心要点提炼'><span>二、核心要点提炼</span></h3><p><strong><span>现象描述</span></strong><span>：</span>
+<span>新就业群体是指依托互联网平台就业的劳动者，主要包括快递员、外卖配送员、网约车司机、家政服务人员、网络主播等。该群体规模庞大，全国已达8400万人，占职工总数的21%。随着数字经济发展，该群体正从传统的基础劳动型岗位向直播带货、在线教育等技术性岗位延伸。</span></p><p><strong><span>原因分析</span></strong><span>：</span></p><ol start='' ><li><p><strong><span>经济与就业压力：</span></strong><span> 经济结构调整期，传统就业岗位承压，新业态起到了“就业蓄水池”的作用，吸纳了大量劳动力，缓解了就业结构性矛盾。</span></p></li><li><p><strong><span>平台经济发展：</span></strong><span> 互联网、大数据、人工智能等技术的成熟与普及，催生了大量平台型企业，创造了新型就业岗位和灵活用工模式。</span></p></li><li><p><strong><span>劳动者需求多样化：</span></strong><span> 部分劳动者追求更灵活的工作时间和地点，新就业形态满足了这一需求。同时，相对较低的门槛也为不同技能层次的劳动者提供了获取收入的途径。</span></p></li></ol><p><strong><span>影响分析</span></strong><span>：</span></p><ul><li><p><strong><span>积极影响：</span></strong></p><ul><li><p><strong><span>稳就业、保民生：</span></strong><span> 成为吸纳就业的“蓄水池”，有效缓解就业压力，增加了劳动者收入。</span></p></li><li><p><strong><span>激活经济：</span></strong><span> 带动餐饮、出行等高频服务型消费，有助于扩大内需，培育中等收入群体。</span></p></li><li><p><strong><span>提升治理水平：</span></strong><span> 倒逼城市提升公共服务精细化水平，通过引导劳动者参与基层治理（如流动网格员），实现了共赢。</span></p></li><li><p><strong><span>促进公平正义：</span></strong><span> 补齐社会保障等短板，保障庞大劳动群体的合法权益，有利于推动共同富裕。</span></p></li></ul></li><li><p><strong><span>消极影响（面临的痛点）：</span></strong></p><ul><li><p><strong><span>劳动权益保障不足：</span></strong><span> 用工关系模糊，导致社保参保门槛高，职业伤害维权难。</span></p></li><li><p><strong><span>金融服务缺失：</span></strong><span> 传统信用评价模式不适用于收入波动大的群体，导致融资难、融资贵。</span></p></li><li><p><strong><span>城市融入度低：</span></strong><span> 休息、如厕等基础需求难以满足，住房、子女教育等公共服务覆盖不够，城市归属感弱。</span></p></li></ul></li></ul><p><strong><span>对策建议</span></strong><span>：</span></p><ol start='' ><li><p><strong><span>健全法治体系：</span></strong><span> 加快推进新就业形态劳动者权益保障立法，明确劳动关系；逐步实现职业伤害保障全覆盖；构建多部门协同监管机制，深化平台算法治理。</span></p></li><li><p><strong><span>优化普惠金融：</span></strong><span> 创新场景化信用评价模型，用平台交易流水等代替传统信用凭证；推出小额、高频、灵活存取等适配性金融产品。</span></p></li><li><p><strong><span>完善公共服务：</span></strong><span> 持续推进“暖心驿站”、“劳动者之家”建设，解决休息、充电等刚需；推出“小哥公寓”、开通异地子女入学绿色通道等，降低城市生活成本。</span></p></li><li><p><strong><span>拓展发展通道：</span></strong><span> 构建终身职业技能培训体系，开展针对性技能培训，打通从低技能岗位向技术性、管理岗位（如社区电商运营）的转型通道。</span></p></li><li><p><strong><span>加强宣传引导：</span></strong><span> 宣传新就业群体的社会贡献与职业优势，通过设立“流动网格员”等方式提升其社会参与感与地位，营造尊重劳动者的社会氛围。</span></p></li></ol><h3 id='三考公应用链接'><span>三、考公应用链接</span></h3><p><strong><span>申论素材</span></strong><span>：</span></p><ul><li><p><strong><span>金句：</span></strong></p><ul><li><p><span>“新就业群体是就业的蓄水池，是稳就业、保民生的核心支撑。”（适用于“稳就业”、“民生保障”主题）</span></p></li><li><p><span>“善待劳动者就是点亮城市未来，这是一种共赢思维。”（适用于“城市治理”、“社会公平”主题）</span></p></li><li><p><span>“以民生温度护航新业态发展。”（可用于“民生”、“经济发展”主题的大作文标题或论点）</span></p></li></ul></li><li><p><strong><span>规范表述：</span></strong></p><ul><li><p><span>“新就业形态劳动者”、“就业蓄水池”、“劳动权益保障制度短板”、“场景化信用评价模型”、“普惠金融”、“柔性关爱”、“公共服务均等化”。</span></p></li></ul></li><li><p><strong><span>典型案例：</span></strong></p><ul><li><p><strong><span>北京工会“骑手驿站”</span></strong><span>与</span><strong><span>上海“小哥公寓”</span></strong><span>：可作为地方政府创新服务、彰显城市温度、完善公共服务的典型案例。适用于“城市治理”、“社会治理”、“民生服务”等主题。</span></p></li><li><p><strong><span>外卖骑手担任流动网格员</span></strong><span>：可作为加强基层社会治理、引导新就业群体参与共建共治的典型案例。适用于“基层治理”、“社会治理创新”等主题。</span></p></li></ul></li><li><p><strong><span>关键数据：</span></strong></p><ul><li><p><span>全国新就业形态劳动者总量已达 </span><strong><span>8400万人</span></strong><span>，占职工总数的 </span><strong><span>21%</span></strong><span>。可用于大作文开篇或论证阶段，以凸显问题的规模与重要性。</span></p></li></ul></li></ul><p><strong><span>面试热点</span></strong><span>：</span></p><ul><li><p><strong><span>可能的面试问题：</span></strong></p><ol start='' ><li><p><span>（综合分析题）近年来，多地出现了为外卖骑手、快递小哥等群体提供服务的“暖心驿站”，但有人认为这只是一种“作秀”。对此，你怎么看？</span></p></li><li><p><span>（组织管理题）为鼓励新就业形态劳动者融入社区，你单位计划招募外卖骑手担任“流动网格员”，协助发现社区治理中的问题。领导将此事交由你负责，你会如何组织？</span></p></li><li><p><span>（应急应变/解决问题题）你是一位街道办工作人员，辖区内不少网约车司机反映停车难、吃饭难、如厕难，你该怎么办？</span></p></li></ol></li></ul><p><strong><span>常识判断</span></strong><span>：</span></p><ul><li><p><strong><span>数据类常识：</span></strong><span> 我国新就业形态劳动者总量已达8400万人。这个数据需要牢记。</span></p></li><li><p><strong><span>政策与治理概念类常识：</span></strong><span> 需要理解“灵活就业”、“新就业形态”、“就业蓄水池”、“普惠金融”、“基层网格化治理”、“流动网格员”、“职业伤害保障”等概念的基本含义及其在政府工作中的体现。</span></p></li></ul></div></div>
+
+<script>(function(){function e(e,n,i){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var t=e.target;t&&t!=this;t=t.parentNode)if(t.matches(n)){!1===i.call(t,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)}var t=document.body.parentElement,i=[],r=null,o=document.body.classList.contains("typora-export-collapse-outline");function a(){return t.scrollTop}e("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),u(),!1}),e("click",".outline-item",function(e){var t=this.querySelector(".outline-label");location.hash=t.getAttribute("href"),o&&((t=this.closest(".outline-item-wrapper").classList).contains("outline-item-open")||t.add("outline-item-open"),d(),t.add("outline-item-active"))});function s(){var e=a();r=null;for(var t=0;t<i.length&&i[t][1]-e<60;t++)r=i[t]}function n(){c=setTimeout(function(){var n;i=[],n=a(),document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(e=>{var t=e.getAttribute("id");i.push([t,n+e.getBoundingClientRect().y])}),s(),u()},300)}var l,c,d=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},u=function(){if(r&&(d(),t=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(r[0]):r[0])+'"]')))if(o){var e=t.closest(".outline-item-open>ul>.outline-item-wrapper");if(e)e.classList.add("outline-item-active");else{for(var t,n=(t=t.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");n;)n=(t=n).parentElement.closest(".outline-item-wrapper");t.classList.add("outline-item-active")}}else t.closest(".outline-item-wrapper").classList.add("outline-item-active")};window.addEventListener("scroll",function(e){l&&clearTimeout(l),l=setTimeout(function(){s(),u()},300)});window.addEventListener("resize",function(e){c&&clearTimeout(c),n()}),n()})();</script></body>
+</html>
