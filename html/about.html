@@ -87,7 +87,20 @@ body::before{
   transition:all .35s ease;
 }
 .stat-card:hover{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.1);transform:translateY(-2px)}
-.stat-card img{margin:0 auto;filter:brightness(.92) contrast(1.05);border-radius:8px}
+.stat-number{
+  font-size:2.2rem;font-weight:700;
+  background:linear-gradient(135deg,#7eb8ff,#ffb7c5);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1.2;
+}
+.stat-label{font-size:.82rem;color:rgba(255,255,255,.45);margin-top:4px;letter-spacing:.5px}
+.stat-card.loading .stat-number{animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.8}}
+.lang-bar-item{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.85rem}
+.lang-name{width:80px;text-align:right;color:rgba(255,255,255,.6);flex-shrink:0}
+.lang-bar{flex:1;height:8px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden}
+.lang-fill{height:100%;border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.23,1,.32,1)}
+.lang-pct{width:36px;color:rgba(255,255,255,.35);font-size:.78rem}
 
 /* ========== Info List ========== */
 .info-list{list-style:none;padding:0}
@@ -171,7 +184,7 @@ body::before{
 
   <!-- Hero -->
   <div class="glass-card hero fade-section">
-    <img class="hero-avatar" src="https://gcore.jsdelivr.net/gh/aeuicey/Picwent/pic/20250702101021407.png" referrerpolicy="no-referrer" alt="avatar">
+    <img class="hero-avatar" src="https://github.com/aeuicey.png" referrerpolicy="no-referrer" alt="avatar">
     <div class="hero-name">aeuicey</div>
     <div class="hero-sub">Vertin_Slixey</div>
     <div class="typing-wrap">
@@ -179,20 +192,18 @@ body::before{
     </div>
   </div>
 
-  <!-- GitHub Stats -->
+  <!-- GitHub Stats (API-driven) -->
   <div class="glass-card fade-section">
     <div class="section-title">GitHub Stats</div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <a href="https://github.com/aeuicey" target="_blank">
-          <img height="180" src="https://github-readme-stats.vercel.app/api?username=aeuicey&show_icons=true&theme=transparent&text_color=cccccc&title_color=ffb7c5&icon_color=7eb8ff&bg_color=00000000" alt="Stats" onload="this.style.opacity=1" style="opacity:0;transition:opacity .5s">
-        </a>
-      </div>
-      <div class="stat-card">
-        <a href="https://github.com/aeuicey" target="_blank">
-          <img height="180" src="https://github-readme-stats.vercel.app/api/top-langs/?username=aeuicey&layout=compact&langs_count=8&card_width=320&theme=transparent&text_color=cccccc&title_color=ffb7c5&bg_color=00000000" alt="Top Languages" onload="this.style.opacity=1" style="opacity:0;transition:opacity .5s">
-        </a>
-      </div>
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card"><div class="stat-number">--</div><div class="stat-label">Public Repos</div></div>
+      <div class="stat-card"><div class="stat-number">--</div><div class="stat-label">Followers</div></div>
+      <div class="stat-card"><div class="stat-number">--</div><div class="stat-label">Following</div></div>
+      <div class="stat-card"><div class="stat-number">--</div><div class="stat-label">Total Stars</div></div>
+    </div>
+    <div id="lang-section" style="margin-top:24px;display:none">
+      <div style="font-size:.88rem;color:rgba(255,255,255,.45);margin-bottom:12px">Top Languages</div>
+      <div id="lang-bars"></div>
     </div>
   </div>
 
@@ -496,6 +507,118 @@ body::before{
     sections.forEach(function(s){ observer.observe(s); });
   } else {
     sections.forEach(function(s){ s.classList.add('visible'); });
+  }
+})();
+
+/* ==========================================================
+   5. GITHUB API STATS (China-friendly: api.github.com)
+   ========================================================== */
+(function(){
+  var LANG_COLORS = {
+    'JavaScript':'#f1e05a','Python':'#3572A5','Java':'#b07219',
+    'HTML':'#e34c26','CSS':'#563d7c','C':'#555555','C++':'#f34b7d',
+    'C#':'#178600','Go':'#00ADD8','Rust':'#dea584','TypeScript':'#2b7489',
+    'Ruby':'#701516','PHP':'#4F5D95','Shell':'#89e051','Lua':'#000080',
+    'Vue':'#41b883','Dart':'#00B4AB','Kotlin':'#A97BFF','Swift':'#F05138'
+  };
+  var DEFAULT_COLOR = '#7eb8ff';
+
+  function animateNumber(el, target){
+    var start = 0, duration = 1200, startTime = null;
+    function step(ts){
+      if(!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(ease * target);
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function loadStats(){
+    var headers = {'Accept':'application/vnd.github.v3+json','User-Agent':'aeuicey-homepage'};
+
+    // Fetch user profile
+    fetch('https://api.github.com/users/aeuicey', {headers:headers})
+      .then(function(r){ return r.json(); })
+      .then(function(user){
+        var cards = document.querySelectorAll('#stats-grid .stat-card');
+        var data = [
+          {value: user.public_repos || 0},
+          {value: user.followers || 0},
+          {value: user.following || 0},
+          {value: null} // stars - need repos fetch
+        ];
+        for(var i = 0; i < Math.min(cards.length, 3); i++){
+          cards[i].classList.remove('loading');
+          animateNumber(cards[i].querySelector('.stat-number'), data[i].value);
+        }
+      })
+      .catch(function(){});
+
+    // Fetch repos for stars + language
+    fetch('https://api.github.com/users/aeuicey/repos?per_page=100&sort=updated', {headers:headers})
+      .then(function(r){ return r.json(); })
+      .then(function(repos){
+        if(!Array.isArray(repos)) return;
+        var cards = document.querySelectorAll('#stats-grid .stat-card');
+
+        // Total stars
+        var totalStars = repos.reduce(function(s,r){ return s + (r.stargazers_count||0); },0);
+        cards[3].classList.remove('loading');
+        animateNumber(cards[3].querySelector('.stat-number'), totalStars);
+
+        // Language distribution (by repo count per language)
+        var langCount = {};
+        repos.forEach(function(r){
+          if(r.language){
+            langCount[r.language] = (langCount[r.language]||0) + 1;
+          }
+        });
+        var sorted = Object.keys(langCount).sort(function(a,b){ return langCount[b]-langCount[a]; });
+        var top = sorted.slice(0, 6);
+        if(top.length === 0) return;
+
+        var maxCount = langCount[top[0]];
+        var section = document.getElementById('lang-section');
+        var bars = document.getElementById('lang-bars');
+        section.style.display = 'block';
+
+        top.forEach(function(lang){
+          var pct = Math.round(langCount[lang] / repos.length * 100);
+          var barWidth = Math.round(langCount[lang] / maxCount * 100);
+          var color = LANG_COLORS[lang] || DEFAULT_COLOR;
+
+          var item = document.createElement('div');
+          item.className = 'lang-bar-item';
+          item.innerHTML =
+            '<span class="lang-name">' + lang + '</span>' +
+            '<div class="lang-bar"><div class="lang-fill" data-width="' + barWidth + '" style="background:' + color + '"></div></div>' +
+            '<span class="lang-pct">' + pct + '%</span>';
+          bars.appendChild(item);
+        });
+
+        // Animate bars after a short delay
+        setTimeout(function(){
+          var fills = bars.querySelectorAll('.lang-fill');
+          fills.forEach(function(f){ f.style.width = f.getAttribute('data-width') + '%'; });
+        }, 300);
+      })
+      .catch(function(){});
+  }
+
+  // Mark cards as loading
+  document.querySelectorAll('#stats-grid .stat-card').forEach(function(c){ c.classList.add('loading'); });
+
+  // Load when stats section is visible
+  var statsCard = document.getElementById('stats-grid').closest('.glass-card');
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){ loadStats(); obs.disconnect(); }
+    }, {threshold: 0.1});
+    obs.observe(statsCard);
+  } else {
+    loadStats();
   }
 })();
 </script>
