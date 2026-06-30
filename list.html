@@ -749,10 +749,294 @@ li > *:last-child {
         .outline-content .outline-h5 .outline-label:before {counter-increment: outline-h5; content: counter(outline-h2, decimal) "." counter(outline-h3, decimal) "." counter(outline-h4, decimal) "." counter(outline-h5, decimal) " ";}
         .outline-content .outline-h6 .outline-label:before {counter-increment: outline-h6; content: counter(outline-h2, decimal) "." counter(outline-h3, decimal) "." counter(outline-h4, decimal) "." counter(outline-h5, decimal) "." counter(outline-h6, decimal) " ";}</style>
 
+<style type='text/css' id="style-dark-theme">
+/* ===== Arknights Dark Theme + Silver Wire Canvas ===== */
+
+/* Canvas layer */
+#silver-wire-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* Dark background */
+html,body{background:#080810 !important}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 20% 30%,rgba(60,65,100,.06) 0%,transparent 55%),radial-gradient(ellipse at 80% 70%,rgba(80,85,120,.04) 0%,transparent 50%),linear-gradient(175deg,#080810 0%,#0b0b18 40%,#0d0d1c 70%,#080810 100%)}
+
+/* Selection */
+.in-text-selection,::selection{background:rgba(160,170,200,.25) !important;color:#e0e0e8 !important;text-shadow:none}
+
+/* Content area */
+#write{color:#c8c8d0 !important;position:relative;z-index:10}
+
+/* Headings */
+h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{color:#e4e4ec !important;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif !important}
+h1,.h1{border-bottom:1px solid rgba(180,190,210,.12);padding-bottom:.4em}
+h2,.h2{border-bottom:1px solid rgba(180,190,210,.06);padding-bottom:.3em}
+
+/* Paragraphs & list items */
+p,.p,li{color:#b0b0bc !important}
+
+/* Links */
+a{color:#8cb4e0 !important;text-decoration:none !important;transition:color .3s,text-shadow .3s}
+a:hover{color:#b0d0f0 !important;text-shadow:0 0 10px rgba(140,180,224,.25)}
+
+/* Bold & italic */
+strong,b{color:#d8d8e0 !important}
+em,i{color:#c0c0cc !important}
+
+/* Blockquote */
+blockquote{border-left-color:rgba(160,170,200,.25) !important;color:#8888a0 !important;background:rgba(255,255,255,.015)}
+blockquote em{color:#c0c0cc !important}
+blockquote footer{background:transparent !important;color:#6a6a80 !important}
+
+/* Code */
+code,.md-fences{color:#9a9ab0 !important;background:rgba(255,255,255,.03) !important;border-color:rgba(160,170,200,.1) !important}
+pre{background:rgba(0,0,0,.3) !important;color:#9a9ab0 !important}
+
+/* Tables */
+table>thead>tr>th,table>thead>tr>td,table>tbody>tr>th,table>tbody>tr>td,table>tfoot>tr>th,table>tfoot>tr>td{border-color:rgba(160,170,200,.12) !important;color:#b0b0bc !important}
+table>thead>tr>th{border-bottom-color:rgba(160,170,200,.25) !important;color:#d0d0d8 !important}
+table>tbody+tbody{border-top-color:rgba(160,170,200,.2) !important}
+
+/* Ordered list numbers */
+ol{color:#9a9ab0 !important}
+ol>li::marker{color:#7a7a90 !important}
+
+/* Horizontal rules */
+hr{border-color:rgba(160,170,200,.1) !important;background:rgba(160,170,200,.1) !important}
+
+/* Sidebar */
+.typora-export-sidebar{background:rgba(8,8,16,.88) !important;border-right:1px solid rgba(160,170,200,.06) !important}
+.typora-export-sidebar .outline-content{background:transparent !important}
+.outline-label{color:#8888a0 !important}
+.outline-label:hover{color:#b0d0f0 !important}
+.outline-item:hover{background:rgba(160,170,200,.05) !important;border-color:rgba(160,170,200,.06) !important}
+.outline-item-active>.outline-item .outline-label{color:#c8d8f0 !important;font-weight:600 !important}
+.outline-expander::before{color:#5a5a70 !important}
+.outline-expander:hover::before{color:#8888a0 !important}
+
+/* Footnotes */
+sup.md-footnote{background:rgba(160,170,200,.1) !important;color:#9a9ab0 !important}
+.footnotes-area{color:#6a6a80 !important}
+
+/* Meta */
+.md-image>.md-meta{color:#7a7a90 !important}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(160,170,200,.12);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(160,170,200,.22)}
+
+/* Print - disable animation bg */
+@media print{body::before,#silver-wire-canvas{display:none !important}html,body{background:#fff !important}#write{color:#333 !important}h1,h2,h3,h4,h5,h6,p,li{color:#333 !important}a{color:#463F5C !important}}
+</style>
+
 <title>list</title>
 </head>
-<body class='typora-export os-windows typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
+<body class='typora-export os-windows typora-export-show-outline typora-export-no-collapse-outline'>
+<canvas id="silver-wire-canvas"></canvas>
+<div class='typora-export-content'>
 <div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#知识库列表">知识库列表</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#大二">大二</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#大三">大三</a></div><ul class="outline-children"></ul></li></ul></li></div></div><div id='write'  class=''><h1 id='知识库列表'><span>知识库列表</span></h1><h2 id='大二'><span>大二</span></h2><ol start='' ><li><p><a href='https://aeuicey.github.io/cailiao.github.io/html/daer/cailiao.html'><span>土木工程材料</span></a></p></li><li><p><a href='https://aeuicey.github.io/cailiao.github.io/html/daer/zhexue.html'><span>哲学基础</span></a></p></li><li><p><a href='https://aeuicey.github.io/cailiao.github.io/html/daer/jingjixue.html'><span>经济学</span></a></p></li></ol><p>&nbsp;</p><h2 id='大三'><span>大三</span></h2><ol start='' ><li><p><a href='https://aeuicey.github.io/cailiao.github.io/html/dasan/jingjifa.html'><span>经济法</span></a></p></li><li><p><a href='https://aeuicey.github.io/cailiao.github.io/html/dasan/经济法补.html'><span>经济法补</span></a><span>    </span></p></li><li><p><a href='https://cloudreve.alicetec.cn/s/eYTk'><span>钢混迅速上手复习资料</span></a><span>       </span></p></li><li><p><a href='https://aeuicey.github.io/cailiao.github.io/html/dasan/毛概复习资料.html'><span>毛概复习资料</span></a><span> </span></p></li><li><p><a href='https://aeuicey.github.io/cailiao.github.io/html/dasan/习思想复习资料.html'><span>习思想复习资料</span></a></p></li></ol><p><span>由 @Alicedreve 贡献PDF存储与预览</span></p></div></div>
 
+<script>
+/* ==========================================================
+   Arknights-style Silver Metallic Wire Animation
+   ========================================================== */
+(function(){
+  var canvas = document.getElementById('silver-wire-canvas');
+  var ctx = canvas.getContext('2d');
+  var W, H;
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* ---------- helpers ---------- */
+  function lerp(a,b,t){ return a+(b-a)*t; }
+
+  /* ---------- particles (tiny sparks) ---------- */
+  var particles = [];
+  var PARTICLE_COUNT = 30;
+  function Particle(){ this.reset(true); }
+  Particle.prototype.reset = function(init){
+    this.x = Math.random()*W;
+    this.y = init ? Math.random()*H : H+10+Math.random()*40;
+    this.size = 0.5+Math.random()*1.8;
+    this.speedY = -(0.15+Math.random()*0.45);
+    this.speedX = (Math.random()-0.5)*0.25;
+    this.opacity = 0.08+Math.random()*0.28;
+    this.flicker = Math.random()*Math.PI*2;
+    this.flickerSpeed = 0.02+Math.random()*0.04;
+  };
+  Particle.prototype.update = function(){
+    this.y += this.speedY;
+    this.x += this.speedX;
+    this.flicker += this.flickerSpeed;
+    if(this.y < -20) this.reset(false);
+  };
+  Particle.prototype.draw = function(){
+    var o = this.opacity*(0.4+0.6*Math.abs(Math.sin(this.flicker)));
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(190,200,220,'+o+')';
+    ctx.fill();
+  };
+  for(var i=0;i<PARTICLE_COUNT;i++){ particles.push(new Particle()); }
+
+  /* ---------- wire configs ---------- */
+  /*
+    Each wire:
+      baseY    : vertical anchor (fraction of H)
+      amp1/2   : primary & secondary amplitude (px)
+      freq1/2  : primary & secondary spatial frequency
+      speed1/2 : animation speed
+      phase    : initial phase offset
+      lw       : base line width
+      alpha    : base opacity
+      glow     : glow blur radius (0 = no glow)
+      bright   : brightness of the metallic highlight (0-1)
+  */
+  var wires = [
+    /* deep background — wide, slow, very faint */
+    {baseY:.12, amp1:55, freq1:.0008, speed1:.003,  amp2:30, freq2:.0018, speed2:.005,  phase:0,    lw:2.8, alpha:.045, glow:12, bright:.55},
+    {baseY:.30, amp1:40, freq1:.0012, speed1:.005,  amp2:22, freq2:.0025, speed2:.007,  phase:1.8,  lw:2.2, alpha:.05,  glow:10, bright:.5},
+    {baseY:.52, amp1:65, freq1:.0007, speed1:.0025, amp2:35, freq2:.0015, speed2:.004,  phase:3.5,  lw:3.0, alpha:.04,  glow:14, bright:.45},
+    {baseY:.75, amp1:45, freq1:.0010, speed1:.004,  amp2:25, freq2:.0022, speed2:.006,  phase:5.0,  lw:2.5, alpha:.05,  glow:11, bright:.5},
+    {baseY:.90, amp1:35, freq1:.0014, speed1:.006,  amp2:18, freq2:.0030, speed2:.008,  phase:2.2,  lw:2.0, alpha:.04,  glow:8,  bright:.45},
+
+    /* midground — moderate */
+    {baseY:.18, amp1:38, freq1:.0016, speed1:.007,  amp2:20, freq2:.0032, speed2:.010,  phase:.6,   lw:1.6, alpha:.09,  glow:6,  bright:.7},
+    {baseY:.40, amp1:30, freq1:.0020, speed1:.009,  amp2:15, freq2:.0040, speed2:.012,  phase:2.8,  lw:1.4, alpha:.10,  glow:5,  bright:.75},
+    {baseY:.60, amp1:42, freq1:.0014, speed1:.006,  amp2:22, freq2:.0028, speed2:.009,  phase:4.2,  lw:1.8, alpha:.08,  glow:7,  bright:.65},
+    {baseY:.82, amp1:28, freq1:.0022, speed1:.010,  amp2:14, freq2:.0045, speed2:.013,  phase:1.2,  lw:1.3, alpha:.09,  glow:5,  bright:.7},
+
+    /* foreground — thin, sharp, brighter */
+    {baseY:.10, amp1:22, freq1:.0028, speed1:.012,  amp2:10, freq2:.0055, speed2:.016,  phase:3.0,  lw:.9,  alpha:.16,  glow:3,  bright:.9},
+    {baseY:.25, amp1:18, freq1:.0035, speed1:.015,  amp2:8,  freq2:.0070, speed2:.020,  phase:.3,   lw:.7,  alpha:.18,  glow:2,  bright:.95},
+    {baseY:.38, amp1:25, freq1:.0025, speed1:.010,  amp2:12, freq2:.0050, speed2:.014,  phase:5.5,  lw:1.0, alpha:.14,  glow:4,  bright:.85},
+    {baseY:.50, amp1:20, freq1:.0030, speed1:.013,  amp2:9,  freq2:.0060, speed2:.018,  phase:1.5,  lw:.8,  alpha:.17,  glow:3,  bright:.92},
+    {baseY:.65, amp1:16, freq1:.0038, speed1:.016,  amp2:7,  freq2:.0075, speed2:.022,  phase:4.0,  lw:.6,  alpha:.20,  glow:2,  bright:.95},
+    {baseY:.78, amp1:24, freq1:.0026, speed1:.011,  amp2:11, freq2:.0052, speed2:.015,  phase:2.5,  lw:.9,  alpha:.15,  glow:3,  bright:.88},
+    {baseY:.92, amp1:19, freq1:.0032, speed1:.014,  amp2:8,  freq2:.0065, speed2:.019,  phase:.8,   lw:.7,  alpha:.18,  glow:2,  bright:.93}
+  ];
+
+  /* ---------- global time ---------- */
+  var t = 0;
+  var globalPulse = 0;
+
+  function animate(){
+    t += 1;
+    globalPulse = 0.5 + 0.5*Math.sin(t*0.008);
+
+    ctx.clearRect(0,0,W,H);
+
+    /* draw particles */
+    for(var i=0;i<particles.length;i++){
+      particles[i].update();
+      particles[i].draw();
+    }
+
+    /* draw wires */
+    for(var wi=0; wi<wires.length; wi++){
+      var w = wires[wi];
+      w.phase += w.speed1;
+
+      var cy = H * w.baseY;
+
+      /* moving highlight position (sweeps across the screen) */
+      var highlightX = (Math.sin(t*0.003 + wi*1.1)*0.5+0.5) * W;
+      var highlightWidth = W * 0.35;
+
+      /* --- glow pass --- */
+      if(w.glow > 0){
+        ctx.beginPath();
+        ctx.moveTo(0, H);
+        for(var x=0; x<=W; x+=4){
+          var y = cy
+                + Math.sin(x*w.freq1 + w.phase)*w.amp1
+                + Math.sin(x*w.freq2 + w.phase*1.3)*w.amp2
+                + Math.cos(x*w.freq1*0.4 + w.phase*0.6)*w.amp1*0.15;
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(W, H);
+        ctx.closePath();
+        var gg = ctx.createLinearGradient(0, cy-w.amp1*1.5, 0, cy+w.amp1*2.5);
+        gg.addColorStop(0, 'rgba(170,180,210,'+(w.alpha*0.6)+')');
+        gg.addColorStop(0.4, 'rgba(150,160,190,'+(w.alpha*0.25)+')');
+        gg.addColorStop(1, 'rgba(130,140,170,0)');
+        ctx.fillStyle = gg;
+        ctx.fill();
+      }
+
+      /* --- crest line with metallic highlight --- */
+      ctx.lineWidth = w.lw;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      /* draw in segments for per-segment metallic brightness */
+      var step = 3;
+      for(var x=0; x<W; x+=step){
+        var x2 = Math.min(x+step, W);
+        var y1 = cy
+              + Math.sin(x*w.freq1 + w.phase)*w.amp1
+              + Math.sin(x*w.freq2 + w.phase*1.3)*w.amp2
+              + Math.cos(x*w.freq1*0.4 + w.phase*0.6)*w.amp1*0.15;
+        var y2 = cy
+              + Math.sin(x2*w.freq1 + w.phase)*w.amp1
+              + Math.sin(x2*w.freq2 + w.phase*1.3)*w.amp2
+              + Math.cos(x2*w.freq1*0.4 + w.phase*0.6)*w.amp1*0.15;
+
+        /* metallic highlight: brightness peaks near highlightX */
+        var distFromHighlight = Math.abs((x+x2)*0.5 - highlightX);
+        var highlightFactor = Math.max(0, 1 - distFromHighlight/highlightWidth);
+        highlightFactor = highlightFactor*highlightFactor; /* ease-in */
+
+        var baseBright = w.bright;
+        var segBright = baseBright + highlightFactor*(1-baseBright)*0.8;
+        var segAlpha = w.alpha * (0.6 + 0.4*segBright);
+
+        /* silver colour: R~192 G~200 B~215 base, pushed brighter near highlight */
+        var r = Math.round(lerp(140, 235, segBright));
+        var g = Math.round(lerp(148, 240, segBright));
+        var b = Math.round(lerp(170, 252, segBright));
+
+        ctx.beginPath();
+        ctx.moveTo(x, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = 'rgba('+r+','+g+','+b+','+segAlpha+')';
+
+        if(w.glow > 0 && highlightFactor > 0.1){
+          ctx.shadowColor = 'rgba(200,210,230,'+(highlightFactor*0.35)+')';
+          ctx.shadowBlur = w.glow * highlightFactor;
+        } else {
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur = 0;
+        }
+        ctx.stroke();
+      }
+      /* reset shadow */
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+    }
+
+    /* --- subtle geometric accents (Arknights corner lines) --- */
+    var cornerAlpha = 0.03 + 0.015*Math.sin(t*0.005);
+    ctx.strokeStyle = 'rgba(180,190,215,'+cornerAlpha+')';
+    ctx.lineWidth = 0.5;
+    /* top-right */
+    ctx.beginPath();
+    ctx.moveTo(W-60, 20); ctx.lineTo(W-20, 20); ctx.lineTo(W-20, 60);
+    ctx.stroke();
+    /* bottom-left */
+    ctx.beginPath();
+    ctx.moveTo(20, H-60); ctx.lineTo(20, H-20); ctx.lineTo(60, H-20);
+    ctx.stroke();
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
 <script>(function(){function e(e,n,i){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var t=e.target;t&&t!=this;t=t.parentNode)if(t.matches(n)){!1===i.call(t,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)}var t=document.body.parentElement,i=[],r=null,o=document.body.classList.contains("typora-export-collapse-outline");function a(){return t.scrollTop}e("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),u(),!1}),e("click",".outline-item",function(e){var t=this.querySelector(".outline-label");location.hash="#"+t.getAttribute("href"),o&&((t=this.closest(".outline-item-wrapper").classList).contains("outline-item-open")||t.add("outline-item-open"),d(),t.add("outline-item-active"))});function s(){var e=a();r=null;for(var t=0;t<i.length&&i[t][1]-e<60;t++)r=i[t]}function n(){c=setTimeout(function(){var n;i=[],n=a(),document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(e=>{var t=e.getAttribute("id");i.push([t,n+e.getBoundingClientRect().y])}),s(),u()},300)}var l,c,d=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},u=function(){if(r&&(d(),t=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(r[0]):r[0])+'"]')))if(o){var e=t.closest(".outline-item-open>ul>.outline-item-wrapper");if(e)e.classList.add("outline-item-active");else{for(var t,n=(t=t.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");n;)n=(t=n).parentElement.closest(".outline-item-wrapper");t.classList.add("outline-item-active")}}else t.closest(".outline-item-wrapper").classList.add("outline-item-active")};window.addEventListener("scroll",function(e){l&&clearTimeout(l),l=setTimeout(function(){s(),u()},300)});window.addEventListener("resize",function(e){c&&clearTimeout(c),n()}),n()})();</script></body>
 </html>
