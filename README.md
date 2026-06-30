@@ -1,132 +1,80 @@
-# 📚 复习知识库 - cailiao.github.io
+# 复习知识库
 
-一个基于 GitHub Pages 的多端自适应复习平台，旨在为学习者提供比传统 Word、PDF 更现代化的知识管理解决方案。
+基于 GitHub Pages 的静态复习资料站点，将课程复习材料从 Word/PDF 转换为在线可访问的 HTML 页面。
 
-## ✨ 项目特色
+## 站点地址
 
-### 🎯 核心优势
-- **📱 多端自适应** - 完美适配电脑、平板、手机等多种设备
-- **⚡ 极速加载** - 静态页面优化，克服 GitHub 网络延迟
-- **🎨 美观界面** - 现代化设计，提升学习体验
-- **🔄 持续更新** - 常态化知识库维护机制
+- 首页入口: https://aeuicey.github.io/cailiao.github.io/
+- 内容列表: https://aeuicey.github.io/cailiao.github.io/list.html
+- 公考知识库（Test阶段）: https://aeuicey.github.io/cailiao.github.io/html/gksz/GK索引.html
+- 关于页面: https://aeuicey.github.io/cailiao.github.io/html/about.html
 
-### 🏗️ 技术架构
-```
-Markdown → HTML → GitHub Pages
-    ↓
-知识整理 → 页面生成 → 在线访问
-```
+## 技术栈
 
-## 📊 项目进展
+- Typora 导出 HTML（Pixyll 主题）作为内容页面基底
+- GitHub Actions 自动部署（push to main → gh-pages）
+- 原生 Canvas 动画（首页银色金属丝波动、关于页樱花飘落与波浪）
+- GitHub REST API 客户端数据获取（关于页统计数据）
 
-### 🗓️ 更新路线图
+## 当前内容
 
-```mermaid
-gantt
-    title 项目开发路线图
-    dateFormat  YYYY-MM
-    axisFormat %Y年%m月
-    
-    section 已完成
-    材料组织与期末复习 :done, 2024-01, 2024-03
-    界面优化与性能提升 :done, 2024-02, 2024-04
-    多端自适应实现 :done, 2024-03, 2024-05
-    
-    section 进行中
-    专业软件知识库更新 :active, 2024-06, 2024-09
-    竞赛时间规划系统 :active, 2024-07, 2024-10
-    
-    section 计划中
-    日常复习机制 :2024-09, 2024-12
-    考研考公知识库 :2024-11, 2025-03
-    就业信息集成 :2025-02, 2025-06
-```
+### 大二
 
-### 📈 当前状态
-| 模块 | 进度 | 状态 | 预计完成 |
-|------|------|------|----------|
-| 基础架构 | ✅ 100% | 已完成 | 2024-05 |
-| 专业软件库 | 🔄 60% | 进行中 | 2024-09 |
-| 竞赛规划 | 🔄 30% | 进行中 | 2024-10 |
-| 日常复习 | ⏳ 0% | 计划中 | 2024-12 |
-| 考研考公 | ⏳ 0% | 计划中 | 2025-03 |
+- 土木工程材料
+- 哲学基础
+- 经济学
 
-## 🚀 快速开始
+### 大三
 
-### 访问方式
-- **主站点**: https://aeuicey.github.io/cailiao.github.io/
-- **备用地址**: https://cailiao.github.io/
+- 经济法 / 经济法补
+- 钢混迅速上手复习资料（外部链接，由 @Alicedreve 提供 PDF 存储与预览）
+- 毛概复习资料
+- 习思想复习资料
 
-### 本地开发
-```bash
-# 克隆仓库
-git clone https://github.com/aeuicey/cailiao.github.io.git
+### 公考资料（Test阶段）
 
-# 进入目录
-cd cailiao.github.io
+- 公考知识库索引（GK索引）
+- 热点夜话系列文章（3篇）
 
-# 在浏览器中打开
-open index.html
-```
+## 页面说明
 
-## 📁 项目结构
+| 页面 | 文件 | 说明 |
+|------|------|------|
+| 首页入口 | `index.html` | 项目介绍页，链接到内容列表、公考知识库、Alicetec 官网等 |
+| 内容列表 | `list.html` | 主页，明日方舟风格深色主题 + 银色金属丝 Canvas 动画 |
+| 关于 | `html/about.html` | 个人介绍，深色主题 + 樱花飘落 + 银色波浪动画 + GitHub 统计 |
+| 复习资料 | `html/dasan/*.html` `html/daer/*.html` | 各科目复习材料，Typora 导出 HTML |
+| 公考知识库 | `html/gksz/GK索引.html` | 公考资料索引页 + 热点夜话系列文章（Test阶段） |
+
+## 项目结构
 
 ```
 cailiao.github.io/
-├── .github/workflows/    # GitHub Actions 工作流
-├── html/                 # 生成的HTML页面
-├── MD/                   # 原始Markdown文件
-├── index.html           # 首页入口
-├── list.html            # 内容列表页
-└── README.md           # 项目说明
+├── .github/workflows/deploy.yml   # GitHub Actions 部署工作流
+├── html/
+│   ├── about.html                 # 关于页面
+│   ├── daer/                      # 大二复习资料
+│   ├── dasan/                     # 大三复习资料
+│   └── gksz/                      # 公考资料（GK索引 + 热点夜话）
+├── MD/                            # 原始 Markdown 文件
+├── index.html                     # 首页入口
+├── list.html                      # 内容列表页
+└── README.md
 ```
 
-## 🎯 核心目标
+## 本地预览
 
-### 短期目标（2024）
-- [x] 完成基础材料组织架构
-- [x] 实现响应式页面设计
-- [ ] 完善专业软件知识库（盈建科、AutoCAD等）
-- [ ] 建立竞赛时间规划系统
+```bash
+git clone https://github.com/aeuicey/cailiao.github.io.git
+cd cailiao.github.io
+# 直接用浏览器打开 list.html 即可
+```
 
-### 长期愿景（2025+）
-- [ ] 建立常态化复习机制
-- [ ] 集成考研考公知识体系
-- [ ] 构建就业信息平台
-- [ ] 推动个人与集体学习进度协同
+## 部署
 
-## 🔄 更新机制
+推送至 `main` 分支后，GitHub Actions 自动构建并部署到 `gh-pages` 分支，站点即时更新。
 
-### 内容更新流程
-1. **知识收集** → Markdown 格式整理
-2. **格式转换** → 自动生成 HTML
-3. **页面发布** → GitHub Pages 部署
-4. **多端同步** → 即时生效访问
+## 贡献者
 
-### 更新频率
-- **日常更新**: 专业知识库每日维护
-- **周期更新**: 竞赛信息每周同步
-- **重大更新**: 架构优化按需发布
-
-## 🤝 参与贡献
-
-我们欢迎以下形式的贡献：
-- 📝 知识内容补充与修正
-- 💻 技术优化与功能开发  
-- 🐛 问题反馈与建议
-- 📚 学习资源分享
-
-## 📄 许可证
-
-本项目采用开源许可证，具体信息请查看 [LICENSE] 文件。
-
-## 📞 联系我们
-
-如有问题或建议，请通过以下方式联系：
-- GitHub Issues: https://github.com/aeuicey/cailiao.github.io/issues
-- 邮箱: 项目维护者邮箱
-
----
-
-*最后更新: 2024年12月*  
-*让我们一起打造更好的学习平台！* 🚀
+- @aeuicey — 项目维护、内容整理、页面开发
+- @Alicedreve — PDF 存储与预览支持
