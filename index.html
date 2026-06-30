@@ -697,11 +697,91 @@ li > *:last-child {
 	margin-bottom: 0;
 }</style>
 <style type='text/css'  id="style-lp">ol, ul {padding-left: 40px}</style>
+<style type='text/css' id="style-dark-theme">
+/* ===== Dark Theme for index.html ===== */
+html,body{background:#080810 !important}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 20% 30%,rgba(60,65,100,.06) 0%,transparent 55%),radial-gradient(ellipse at 80% 70%,rgba(80,85,120,.04) 0%,transparent 50%),linear-gradient(175deg,#080810 0%,#0b0b18 40%,#0d0d1c 70%,#080810 100%)}
+::selection{background:rgba(160,170,200,.25) !important;color:#e0e0e8 !important;text-shadow:none}
+#write{color:#c8c8d0 !important;position:relative;z-index:10}
+h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{color:#e4e4ec !important;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif !important}
+h1,.h1{border-bottom:1px solid rgba(180,190,210,.12);padding-bottom:.4em}
+h2,.h2{border-bottom:1px solid rgba(180,190,210,.06);padding-bottom:.3em}
+p,.p,li{color:#b0b0bc !important}
+a{color:#8cb4e0 !important;text-decoration:none !important;transition:color .3s,text-shadow .3s}
+a:hover{color:#b0d0f0 !important;text-shadow:0 0 10px rgba(140,180,224,.25)}
+strong,b{color:#d8d8e0 !important}
+em,i{color:#c0c0cc !important}
+blockquote{border-left-color:rgba(160,170,200,.25) !important;color:#8888a0 !important;background:rgba(255,255,255,.015)}
+code,.md-fences{color:#9a9ab0 !important;background:rgba(255,255,255,.03) !important;border-color:rgba(160,170,200,.1) !important}
+.typora-export-sidebar{background:rgba(8,8,16,.88) !important;border-right:1px solid rgba(160,170,200,.06) !important}
+.typora-export-sidebar .outline-content{background:transparent !important}
+.outline-label{color:#8888a0 !important}
+.outline-label:hover{color:#b0d0f0 !important}
+.outline-item:hover{background:rgba(160,170,200,.05) !important;border-color:rgba(160,170,200,.06) !important}
+.outline-item-active>.outline-item .outline-label{color:#c8d8f0 !important;font-weight:600 !important}
+.outline-expander::before{color:#5a5a70 !important}
+.outline-expander:hover::before{color:#8888a0 !important}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(160,170,200,.12);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(160,170,200,.22)}
+@media print{body::before{display:none !important}html,body{background:#fff !important}#write{color:#333 !important}h1,h2,h3,h4,h5,h6,p,li{color:#333 !important}a{color:#463F5C !important}}
+</style>
+<style type='text/css' id="style-theme-toggle">
+/* Theme Toggle Button */
+.theme-toggle{position:fixed;top:20px;right:20px;width:56px;height:28px;border-radius:14px;background:rgba(128,128,145,.18);border:1px solid rgba(128,128,145,.2);cursor:pointer;z-index:99999;transition:background .3s ease;padding:3px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;outline:none;-webkit-appearance:none;appearance:none}
+.theme-toggle:hover{background:rgba(128,128,145,.28)}
+.theme-toggle-sun{color:rgba(255,200,50,.7);flex-shrink:0;pointer-events:none}
+.theme-toggle-moon{color:rgba(180,190,220,.5);flex-shrink:0;pointer-events:none}
+.theme-toggle-knob{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#e0e0e0;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:transform .35s cubic-bezier(.4,0,.2,1),background .3s ease;pointer-events:none}
+.theme-toggle.dark .theme-toggle-knob{transform:translateX(28px);background:#1e1e2e}
+.theme-toggle.dark{background:rgba(40,40,60,.3)}
+</style>
+<script>
+/* FOUC prevention - set initial theme before body renders */
+(function(){
+  var s=localStorage.getItem('theme-preference');
+  var d=s?s==='dark':window.matchMedia('(prefers-color-scheme:dark)').matches;
+  document.documentElement.setAttribute('data-theme',d?'dark':'light');
+  var st=document.getElementById('style-dark-theme');
+  if(st) st.disabled=!d;
+})();
+</script>
 
 <title>这是一个遇见世界的知识库</title>
 </head>
 <body class='typora-export os-windows typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
 <div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#这是一个遇见世界的知识库">这是一个遇见世界的知识库</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#一我们提供什么">一、我们提供什么？</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#二我们会对文档进行怎样的改动">二、我们会对文档进行怎样的改动？</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#那么让我们开始吧-😊">那么让我们开始吧 ！😊</a></div><ul class="outline-children"></ul></li></ul></li></div></div><div id='write'  class=''><h1 id='这是一个遇见世界的知识库'><span>这是一个遇见世界的知识库</span></h1><p><img src="https://gcore.jsdelivr.net/gh/aeuicey/Picwent/pic/20250707152330167.png" alt="用知识邂逅艺术。"></p><h2 id='一我们提供什么'><span>一、我们提供什么？</span></h2><p><span>为了减少大家为了期末毫无意义的考试浪费的时间，@Alicetec构建了一个Github仓库用来存储期末复习以及其他评价性考试的复习资料。这个网站开源开放，任何人都可以联系</span><a href='mailto:tianminrui@alicetec.cn' target='_blank' class='url'>tianminrui@alicetec.cn</a><span>来进行贡献。我们也尊重并保护知识原作者的产权，不会阻碍任何原创性的标识。╰(</span><em><span>°▽°</span></em><span>)╯</span></p><h2 id='二我们会对文档进行怎样的改动'><span>二、我们会对文档进行怎样的改动？</span></h2><p><span>针对.md格式或其他格式，我们会对这些文档静态化。如果你对网页设计感兴趣，或者熟练使用Vue或者Next.js等设计语言以及生成器，欢迎你的加入与贡献。💕</span></p><h2 id='那么让我们开始吧-😊'><span>那么让我们开始吧 ！😊</span></h2><p><span>访问  </span><a href='https://aeuicey.github.io/cailiao.github.io/list' target='_blank' class='url'>https://aeuicey.github.io/cailiao.github.io/list</a><span>  即可开始的知识畅游之旅</span></p><p><span>想要考公？那么请访问我们的公考知识库（Test阶段）</span></p><p><span> </span><a href='https://aeuicey.github.io/cailiao.github.io/html/gksz/GK索引.html'><span>单击访问</span></a></p><p><span> </span><a href='https://www.alicetec.cn'><span>Alicetec官网</span></a><span>  </span><a href='https://github.com/aeuicey/cailiao.github.io'><span>Github仓库</span></a><span>  </span><a href='https://aeuicey.github.io/cailiao.github.io/html/about.html'><span>关于作者</span></a></p></div></div>
 
+<script>
+/* Theme Toggle Button Logic */
+(function(){
+  var KEY='theme-preference';
+  var html=document.documentElement;
+  var stored=localStorage.getItem(KEY);
+  var sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+  var isDark=stored?stored==='dark':sysDark;
+  var btn=document.createElement('button');
+  btn.className='theme-toggle'+(isDark?' dark':'');
+  btn.id='themeToggle';
+  btn.setAttribute('aria-label','切换主题');
+  btn.innerHTML='<svg class="theme-toggle-sun" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v1.5M12 19.5V21M3 12h1.5M19.5 12H21M5.6 5.6l1 1M17.4 17.4l1 1M5.6 18.4l1-1M17.4 6.6l1-1"/></svg><div class="theme-toggle-knob"></div><svg class="theme-toggle-moon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5z"/></svg>';
+  document.body.appendChild(btn);
+  function applyTheme(dark){
+    var darkStyle=document.getElementById('style-dark-theme');
+    html.setAttribute('data-theme',dark?'dark':'light');
+    if(dark){btn.classList.add('dark');if(darkStyle)darkStyle.disabled=false}
+    else{btn.classList.remove('dark');if(darkStyle)darkStyle.disabled=true}
+  }
+  btn.addEventListener('click',function(){
+    var newDark=!btn.classList.contains('dark');
+    localStorage.setItem(KEY,newDark?'dark':'light');
+    applyTheme(newDark);
+  });
+  window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',function(e){
+    if(!localStorage.getItem(KEY))applyTheme(e.matches);
+  });
+})();
+</script>
 <script>(function(){function e(e,n,i){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var t=e.target;t&&t!=this;t=t.parentNode)if(t.matches(n)){!1===i.call(t,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)}var t=document.body.parentElement,i=[],r=null,o=document.body.classList.contains("typora-export-collapse-outline");function a(){return t.scrollTop}e("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),u(),!1}),e("click",".outline-item",function(e){var t=this.querySelector(".outline-label");location.hash=t.getAttribute("href"),o&&((t=this.closest(".outline-item-wrapper").classList).contains("outline-item-open")||t.add("outline-item-open"),d(),t.add("outline-item-active"))});function s(){var e=a();r=null;for(var t=0;t<i.length&&i[t][1]-e<60;t++)r=i[t]}function n(){c=setTimeout(function(){var n;i=[],n=a(),document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(e=>{var t=e.getAttribute("id");i.push([t,n+e.getBoundingClientRect().y])}),s(),u()},300)}var l,c,d=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},u=function(){if(r&&(d(),t=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(r[0]):r[0])+'"]')))if(o){var e=t.closest(".outline-item-open>ul>.outline-item-wrapper");if(e)e.classList.add("outline-item-active");else{for(var t,n=(t=t.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");n;)n=(t=n).parentElement.closest(".outline-item-wrapper");t.classList.add("outline-item-active")}}else t.closest(".outline-item-wrapper").classList.add("outline-item-active")};window.addEventListener("scroll",function(e){l&&clearTimeout(l),l=setTimeout(function(){s(),u()},300)});window.addEventListener("resize",function(e){c&&clearTimeout(c),n()}),n()})();</script></body>
 </html>
