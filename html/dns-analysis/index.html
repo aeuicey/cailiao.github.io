@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="https://www.alicetec.cn/upload/38d0b2c8e35c1d1ffcb09180fc88ab32.png" />
+<title>alicetec.cn DNS 分析报告</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-deep:#06060f;--bg-card:rgba(14,14,28,.72);--bg-card-hover:rgba(20,20,40,.85);
+  --border:rgba(100,120,180,.1);--border-glow:rgba(100,140,220,.18);
+  --text-primary:#e0e0ec;--text-secondary:#9898b0;--text-muted:#6a6a82;
+  --accent-blue:#4a8eff;--accent-purple:#8b5cf6;--accent-cyan:#22d3ee;
+  --accent-green:#34d399;--accent-red:#f43f5e;--accent-amber:#f59e0b;
+  --grad-bar:linear-gradient(90deg,#4a8eff,#8b5cf6);
+  --grad-bar-green:linear-gradient(90deg,#34d399,#22d3ee);
+  --grad-bar-red:linear-gradient(90deg,#f43f5e,#e11d48);
+  --mono:'JetBrains Mono',monospace;--sans:'Noto Sans SC',system-ui,-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;
+  --radius:10px;--radius-sm:6px;
+}
+html{font-size:15px;scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--text-primary);
+  background:var(--bg-deep);min-height:100vh;line-height:1.6;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 20%,rgba(74,142,255,.04) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 75%,rgba(139,92,246,.035) 0%,transparent 55%),
+    radial-gradient(ellipse 90% 40% at 50% 100%,rgba(34,211,238,.02) 0%,transparent 50%);
+}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(100,120,180,.15);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(100,120,180,.28)}
+
+.container{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 3rem}
+
+/* ── Header ── */
+.header{text-align:center;margin-bottom:2.8rem;position:relative}
+.header::after{content:'';display:block;width:120px;height:1px;background:var(--grad-bar);margin:1.2rem auto 0;border-radius:2px}
+.header-badge{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;
+  color:var(--accent-cyan);background:rgba(34,211,238,.06);
+  border:1px solid rgba(34,211,238,.15);border-radius:20px;
+  padding:.3rem .9rem;margin-bottom:1rem;text-transform:uppercase;
+}
+.header-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-cyan);animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:.4;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+.header h1{font-size:2rem;font-weight:700;letter-spacing:-.02em;color:var(--text-primary)}
+.header h1 span{background:var(--grad-bar);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header-sub{color:var(--text-muted);font-size:.85rem;margin-top:.5rem;font-family:var(--mono)}
+
+/* ── Section ── */
+.section{margin-bottom:2.5rem}
+.section-title{
+  font-size:1.05rem;font-weight:700;color:var(--text-primary);
+  margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem;
+}
+.section-title .icon{
+  width:28px;height:28px;border-radius:var(--radius-sm);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:.85rem;flex-shrink:0;
+}
+.section-title .icon.blue{background:rgba(74,142,255,.12);color:var(--accent-blue)}
+.section-title .icon.purple{background:rgba(139,92,246,.12);color:var(--accent-purple)}
+.section-title .icon.green{background:rgba(52,211,153,.12);color:var(--accent-green)}
+.section-title .icon.red{background:rgba(244,63,94,.12);color:var(--accent-red)}
+.section-title .icon.amber{background:rgba(245,158,11,.12);color:var(--accent-amber)}
+.section-title .icon.cyan{background:rgba(34,211,238,.12);color:var(--accent-cyan)}
+
+/* ── Stat Cards ── */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
+@media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.stats-grid{grid-template-columns:1fr}}
+.stat-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1.1rem 1.2rem;position:relative;overflow:hidden;
+  transition:border-color .3s,transform .25s,box-shadow .3s;
+}
+.stat-card:hover{border-color:var(--border-glow);transform:translateY(-2px);box-shadow:0 8px 30px rgba(74,142,255,.06)}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--grad-bar);opacity:.5;transition:opacity .3s;
+}
+.stat-card:hover::before{opacity:1}
+.stat-label{font-size:.72rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.45rem;font-family:var(--mono)}
+.stat-value{font-size:1.65rem;font-weight:700;font-family:var(--mono);color:var(--text-primary);line-height:1.2}
+.stat-value .unit{font-size:.75rem;font-weight:400;color:var(--text-secondary);margin-left:.2rem}
+.stat-note{font-size:.7rem;color:var(--text-muted);margin-top:.3rem}
+.stat-card.accent-green::before{background:var(--grad-bar-green)}
+.stat-card.accent-green .stat-value{color:var(--accent-green)}
+
+/* ── Tables ── */
+.table-wrap{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;
+}
+.table-wrap table{width:100%;border-collapse:collapse;font-size:.85rem}
+.table-wrap thead th{
+  text-align:left;padding:.7rem 1rem;font-size:.7rem;font-weight:600;
+  color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;
+  font-family:var(--mono);border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.015);
+}
+.table-wrap tbody td{padding:.6rem 1rem;border-bottom:1px solid rgba(100,120,180,.05);color:var(--text-secondary)}
+.table-wrap tbody tr:nth-child(even){background:rgba(255,255,255,.012)}
+.table-wrap tbody tr:hover{background:rgba(74,142,255,.04)}
+.table-wrap tbody tr:last-child td{border-bottom:none}
+.table-wrap .mono{font-family:var(--mono);font-size:.8rem}
+.table-wrap .num{font-family:var(--mono);font-weight:600;color:var(--text-primary);text-align:right}
+
+/* ── Progress Bars ── */
+.bar-cell{display:flex;align-items:center;gap:.6rem}
+.bar-track{flex:1;height:6px;background:rgba(255,255,255,.04);border-radius:3px;overflow:hidden;min-width:60px}
+.bar-fill{height:100%;border-radius:3px;background:var(--grad-bar);transition:width .8s cubic-bezier(.22,1,.36,1)}
+.bar-pct{font-family:var(--mono);font-size:.72rem;color:var(--text-muted);min-width:3.2em;text-align:right}
+
+/* ── Two-col layout ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+@media(max-width:768px){.two-col{grid-template-columns:1fr}}
+
+/* ── Bar Chart (daily trend) ── */
+.chart-bars{display:flex;align-items:flex-end;gap:.5rem;height:140px;padding:0 .5rem}
+.chart-bar-col{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  height:100%;justify-content:flex-end;
+}
+.chart-bar{
+  width:100%;border-radius:4px 4px 0 0;background:var(--grad-bar);
+  position:relative;min-height:4px;transition:height .8s cubic-bezier(.22,1,.36,1);
+  opacity:.75;
+}
+.chart-bar:hover{opacity:1}
+.chart-bar-val{
+  font-family:var(--mono);font-size:.65rem;color:var(--text-muted);
+  position:absolute;top:-1.2rem;left:50%;transform:translateX(-50%);white-space:nowrap;
+}
+.chart-bar-label{font-size:.65rem;color:var(--text-muted);font-family:var(--mono)}
+
+/* ── Protocol pills ── */
+.proto-row{display:flex;gap:.8rem;flex-wrap:wrap}
+.proto-pill{
+  display:flex;align-items:center;gap:.6rem;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:.8rem 1.2rem;flex:1;min-width:180px;
+}
+.proto-pill .proto-name{font-family:var(--mono);font-weight:700;font-size:.95rem;color:var(--text-primary)}
+.proto-pill .proto-stat{font-family:var(--mono);font-size:.75rem;color:var(--text-muted)}
+.proto-pill .proto-bar{flex:1;height:5px;background:rgba(255,255,255,.04);border-radius:3px;overflow:hidden}
+.proto-pill .proto-bar-fill{height:100%;border-radius:3px;background:var(--grad-bar-green)}
+
+/* ── Chips / Tags ── */
+.chip-group{margin-bottom:1rem}
+.chip-group-title{font-size:.78rem;color:var(--text-muted);margin-bottom:.55rem;font-family:var(--mono);display:flex;align-items:center;gap:.4rem}
+.chip-group-title .count{
+  background:rgba(74,142,255,.1);color:var(--accent-blue);
+  padding:.1rem .45rem;border-radius:10px;font-size:.65rem;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem}
+.chip{
+  font-family:var(--mono);font-size:.72rem;
+  padding:.28rem .6rem;border-radius:5px;
+  background:rgba(74,142,255,.06);border:1px solid rgba(74,142,255,.1);
+  color:var(--accent-blue);white-space:nowrap;
+  transition:background .2s,border-color .2s;
+}
+.chip:hover{background:rgba(74,142,255,.12);border-color:rgba(74,142,255,.22)}
+.chip.purple{background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.1);color:var(--accent-purple)}
+.chip.purple:hover{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.22)}
+.chip.amber{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.12);color:var(--accent-amber)}
+.chip.amber:hover{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.22)}
+
+/* ── NXDOMAIN warning table ── */
+.nx-table thead th{color:var(--accent-red) !important;border-bottom-color:rgba(244,63,94,.2) !important}
+.nx-table tbody td{color:#c0a0a8 !important}
+.nx-table tbody tr:hover{background:rgba(244,63,94,.04) !important}
+.nx-badge{
+  display:inline-block;font-family:var(--mono);font-size:.65rem;
+  padding:.15rem .45rem;border-radius:4px;
+  background:rgba(244,63,94,.1);color:var(--accent-red);border:1px solid rgba(244,63,94,.15);
+}
+
+/* ── Findings ── */
+.findings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.8rem}
+.finding-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:1rem 1.1rem;display:flex;gap:.8rem;align-items:flex-start;
+  transition:border-color .3s;
+}
+.finding-card:hover{border-color:var(--border-glow)}
+.finding-num{
+  font-family:var(--mono);font-size:.7rem;font-weight:700;
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(74,142,255,.1);color:var(--accent-blue);
+}
+.finding-card:nth-child(4) .finding-num{background:rgba(244,63,94,.1);color:var(--accent-red)}
+.finding-text{font-size:.82rem;color:var(--text-secondary);line-height:1.55}
+.finding-text strong{color:var(--text-primary);font-weight:600}
+
+/* ── Footer ── */
+.footer{
+  text-align:center;padding-top:2rem;margin-top:1rem;
+  border-top:1px solid var(--border);
+}
+.footer p{font-size:.72rem;color:var(--text-muted);font-family:var(--mono);line-height:1.8}
+.footer .sep{margin:0 .4rem;opacity:.3}
+
+/* ── Animations ── */
+@keyframes fade-up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.section{animation:fade-up .6s ease-out both}
+.section:nth-child(2){animation-delay:.08s}
+.section:nth-child(3){animation-delay:.14s}
+.section:nth-child(4){animation-delay:.2s}
+.section:nth-child(5){animation-delay:.26s}
+.section:nth-child(6){animation-delay:.32s}
+.section:nth-child(7){animation-delay:.38s}
+.section:nth-child(8){animation-delay:.44s}
+.section:nth-child(9){animation-delay:.5s}
+.section:nth-child(10){animation-delay:.56s}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="header-badge"><span class="dot"></span> DNS Analytics Live</div>
+  <h1><span>alicetec.cn</span> DNS 分析报告</h1>
+  <div class="header-sub">报告周期：2026-07-01 ~ 2026-07-07 ｜ 数据来源：Cloudflare DNS Analytics API</div>
+</div>
+
+<!-- Overview Stats -->
+<div class="section">
+  <div class="section-title"><span class="icon blue">◈</span> 概览</div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">查询总量</div>
+      <div class="stat-value">78,300<span class="unit">次</span></div>
+      <div class="stat-note">近 7 天</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">日均查询</div>
+      <div class="stat-value">~11,186<span class="unit">次/天</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">唯一子域名</div>
+      <div class="stat-value">43<span class="unit">个</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">唯一来源 IP</div>
+      <div class="stat-value">514<span class="unit">个</span></div>
+    </div>
+    <div class="stat-card accent-green">
+      <div class="stat-label">响应成功率</div>
+      <div class="stat-value">98.3<span class="unit">%</span></div>
+      <div class="stat-note">NOERROR</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">数据保留期</div>
+      <div class="stat-value">~8<span class="unit">天</span></div>
+      <div class="stat-note">Free 计划</div>
+    </div>
+  </div>
+</div>
+
+<!-- Query Type Distribution -->
+<div class="section">
+  <div class="section-title"><span class="icon purple">◇</span> 查询类型分布</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>类型</th><th>样本数</th><th style="min-width:180px">占比</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">A</td><td class="num">440</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:56.3%"></div></div><span class="bar-pct">56.3%</span></div></td></tr>
+        <tr><td class="mono">AAAA</td><td class="num">175</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:22.4%"></div></div><span class="bar-pct">22.4%</span></div></td></tr>
+        <tr><td class="mono">DNSKEY</td><td class="num">84</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:10.8%"></div></div><span class="bar-pct">10.8%</span></div></td></tr>
+        <tr><td class="mono">MX</td><td class="num">18</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:2.3%"></div></div><span class="bar-pct">2.3%</span></div></td></tr>
+        <tr><td class="mono">HTTPS</td><td class="num">16</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:2.0%"></div></div><span class="bar-pct">2.0%</span></div></td></tr>
+        <tr><td class="mono">NS</td><td class="num">15</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:1.9%"></div></div><span class="bar-pct">1.9%</span></div></td></tr>
+        <tr><td class="mono">CNAME</td><td class="num">12</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:1.5%"></div></div><span class="bar-pct">1.5%</span></div></td></tr>
+        <tr><td class="mono">TXT</td><td class="num">10</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:1.3%"></div></div><span class="bar-pct">1.3%</span></div></td></tr>
+        <tr><td class="mono">SOA</td><td class="num">7</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:0.9%"></div></div><span class="bar-pct">0.9%</span></div></td></tr>
+        <tr><td class="mono">ADDR</td><td class="num">5</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:0.6%"></div></div><span class="bar-pct">0.6%</span></div></td></tr>
+        <tr><td class="mono">RP</td><td class="num">1</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:0.3%"></div></div><span class="bar-pct">0.1%</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Response Code + Protocol -->
+<div class="section">
+  <div class="two-col">
+    <div>
+      <div class="section-title"><span class="icon green">◆</span> 响应码分布</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>响应码</th><th>样本数</th><th>占比</th></tr></thead>
+          <tbody>
+            <tr><td class="mono" style="color:var(--accent-green)">NOERROR</td><td class="num">770</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:98.3%;background:var(--grad-bar-green)"></div></div><span class="bar-pct">98.3%</span></div></td></tr>
+            <tr><td class="mono" style="color:var(--accent-red)">NXDOMAIN</td><td class="num">13</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:1.7%;background:var(--grad-bar-red)"></div></div><span class="bar-pct">1.7%</span></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="section-title"><span class="icon cyan">◉</span> 协议分布</div>
+      <div class="proto-row" style="flex-direction:column">
+        <div class="proto-pill">
+          <span class="proto-name">UDP</span>
+          <span class="proto-stat">782 (99.9%)</span>
+          <div class="proto-bar"><div class="proto-bar-fill" style="width:99.9%"></div></div>
+        </div>
+        <div class="proto-pill">
+          <span class="proto-name">TCP</span>
+          <span class="proto-stat">1 (0.1%)</span>
+          <div class="proto-bar"><div class="proto-bar-fill" style="width:2%;background:var(--grad-bar)"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Top 10 Domains -->
+<div class="section">
+  <div class="section-title"><span class="icon blue">▣</span> 热门域名排行 TOP 10</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:40px">#</th><th>域名</th><th>样本数</th><th style="min-width:180px">占比</th></tr></thead>
+      <tbody>
+        <tr><td class="mono" style="color:var(--accent-amber)">1</td><td class="mono">www.alicetec.cn</td><td class="num">357</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:45.6%"></div></div><span class="bar-pct">45.6%</span></div></td></tr>
+        <tr><td class="mono" style="color:var(--accent-amber)">2</td><td class="mono">alicetec.cn</td><td class="num">153</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:19.6%"></div></div><span class="bar-pct">19.6%</span></div></td></tr>
+        <tr><td class="mono">3</td><td class="mono">game.alicetec.cn</td><td class="num">39</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:5.0%"></div></div><span class="bar-pct">5.0%</span></div></td></tr>
+        <tr><td class="mono">4</td><td class="mono">auth.alicetec.cn</td><td class="num">34</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:4.3%"></div></div><span class="bar-pct">4.3%</span></div></td></tr>
+        <tr><td class="mono">5</td><td class="mono">cloudreve.alicetec.cn</td><td class="num">29</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:3.7%"></div></div><span class="bar-pct">3.7%</span></div></td></tr>
+        <tr><td class="mono">6</td><td class="mono">utx.alicetec.cn</td><td class="num">24</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:3.1%"></div></div><span class="bar-pct">3.1%</span></div></td></tr>
+        <tr><td class="mono">7</td><td class="mono" style="color:var(--accent-purple)">wallnut.top</td><td class="num">24</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:3.1%"></div></div><span class="bar-pct">3.1%</span></div></td></tr>
+        <tr><td class="mono">8</td><td class="mono">github.alicetec.cn</td><td class="num">14</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:1.8%"></div></div><span class="bar-pct">1.8%</span></div></td></tr>
+        <tr><td class="mono">9</td><td class="mono" style="color:var(--accent-purple)">www.wallnut.top</td><td class="num">13</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:1.7%"></div></div><span class="bar-pct">1.7%</span></div></td></tr>
+        <tr><td class="mono">10</td><td class="mono">rain.alicetec.cn</td><td class="num">9</td><td><div class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:1.2%"></div></div><span class="bar-pct">1.2%</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Daily Trend -->
+<div class="section">
+  <div class="section-title"><span class="icon purple">▤</span> 每日查询趋势</div>
+  <div class="table-wrap" style="padding:1.2rem 1rem .8rem">
+    <div class="chart-bars">
+      <div class="chart-bar-col"><div class="chart-bar" style="height:77.8%"><span class="chart-bar-val">105</span></div><span class="chart-bar-label">07-01</span></div>
+      <div class="chart-bar-col"><div class="chart-bar" style="height:96.3%"><span class="chart-bar-val">130</span></div><span class="chart-bar-label">07-02</span></div>
+      <div class="chart-bar-col"><div class="chart-bar" style="height:83.0%"><span class="chart-bar-val">112</span></div><span class="chart-bar-label">07-03</span></div>
+      <div class="chart-bar-col"><div class="chart-bar" style="height:71.9%"><span class="chart-bar-val">97</span></div><span class="chart-bar-label">07-04</span></div>
+      <div class="chart-bar-col"><div class="chart-bar" style="height:100%"><span class="chart-bar-val">135</span></div><span class="chart-bar-label">07-05</span></div>
+      <div class="chart-bar-col"><div class="chart-bar" style="height:95.6%"><span class="chart-bar-val">129</span></div><span class="chart-bar-label">07-06</span></div>
+      <div class="chart-bar-col"><div class="chart-bar" style="height:55.6%;opacity:.5"><span class="chart-bar-val">75</span></div><span class="chart-bar-label">07-07</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Subdomains -->
+<div class="section">
+  <div class="section-title"><span class="icon cyan">◎</span> 发现的所有子域名 <span style="font-size:.75rem;color:var(--text-muted);font-weight:400;margin-left:.3rem">（43 个）</span></div>
+  <div class="table-wrap" style="padding:1.1rem 1.2rem">
+    <div class="chip-group">
+      <div class="chip-group-title">alicetec.cn <span class="count">33</span></div>
+      <div class="chips">
+        <span class="chip">alicetec.cn</span><span class="chip">www.alicetec.cn</span><span class="chip">api.alicetec.cn</span><span class="chip">auth.alicetec.cn</span><span class="chip">www.auth.alicetec.cn</span><span class="chip">aws.alicetec.cn</span><span class="chip">www.aws.alicetec.cn</span><span class="chip">blog.alicetec.cn</span><span class="chip">cloudreve.alicetec.cn</span><span class="chip">www.cloudreve.alicetec.cn</span><span class="chip">desk.alicetec.cn</span><span class="chip">douyin.alicetec.cn</span><span class="chip">game.alicetec.cn</span><span class="chip">github.alicetec.cn</span><span class="chip">halo.alicetec.cn</span><span class="chip">www.halo.alicetec.cn</span><span class="chip">hotpotapi.alicetec.cn</span><span class="chip">kzt.alicetec.cn</span><span class="chip">www.kzt.alicetec.cn</span><span class="chip">learn.alicetec.cn</span><span class="chip">main.alicetec.cn</span><span class="chip">music.alicetec.cn</span><span class="chip">proj.alicetec.cn</span><span class="chip">rain.alicetec.cn</span><span class="chip">www.rain.alicetec.cn</span><span class="chip">rdp.alicetec.cn</span><span class="chip">safe.alicetec.cn</span><span class="chip">teams.alicetec.cn</span><span class="chip">utx.alicetec.cn</span><span class="chip">www.utx.alicetec.cn</span><span class="chip">www.pic.alicetec.cn</span><span class="chip">_mta-sts.alicetec.cn</span><span class="chip">*.alicetec.cn</span>
+      </div>
+    </div>
+    <div class="chip-group">
+      <div class="chip-group-title">wallnut.top <span class="count">5</span></div>
+      <div class="chips">
+        <span class="chip purple">wallnut.top</span><span class="chip purple">www.wallnut.top</span><span class="chip purple">login.wallnut.top</span><span class="chip purple">owa.wallnut.top</span><span class="chip purple">remote.wallnut.top</span>
+      </div>
+    </div>
+    <div class="chip-group">
+      <div class="chip-group-title">其他 <span class="count">1</span></div>
+      <div class="chips">
+        <span class="chip amber">hello-world-round-river-8d4f.alicebhs.workers.dev</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NXDOMAIN -->
+<div class="section">
+  <div class="section-title"><span class="icon red">⚠</span> NXDOMAIN 失败查询记录 <span style="font-size:.75rem;color:var(--text-muted);font-weight:400;margin-left:.3rem">（13 条）</span></div>
+  <div class="table-wrap nx-table">
+    <table>
+      <thead><tr><th>域名</th><th>类型</th><th>时间</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">music.alicetec.cn</td><td><span class="nx-badge">AAAA</span></td><td class="mono">2026-07-06</td></tr>
+        <tr><td class="mono">safe.alicetec.cn</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-06</td></tr>
+        <tr><td class="mono">www.halo.alicetec.cn</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-06</td></tr>
+        <tr><td class="mono">login.wallnut.top</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-05</td></tr>
+        <tr><td class="mono">remote.wallnut.top</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-05</td></tr>
+        <tr><td class="mono">teams.alicetec.cn</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-05</td></tr>
+        <tr><td class="mono">aws.alicetec.cn</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-03</td></tr>
+        <tr><td class="mono">halo.alicetec.cn</td><td><span class="nx-badge">MX</span></td><td class="mono">2026-07-03</td></tr>
+        <tr><td class="mono">hotpotapi.alicetec.cn</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-03</td></tr>
+        <tr><td class="mono">owa.wallnut.top</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-02</td></tr>
+        <tr><td class="mono">safe.alicetec.cn</td><td><span class="nx-badge">AAAA</span></td><td class="mono">2026-07-02</td></tr>
+        <tr><td class="mono">pbavdgame.alicetec.cn</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-02</td></tr>
+        <tr><td class="mono">halo.alicetec.cn</td><td><span class="nx-badge">A</span></td><td class="mono">2026-07-01</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Key Findings -->
+<div class="section">
+  <div class="section-title"><span class="icon amber">★</span> 关键发现</div>
+  <div class="findings-grid">
+    <div class="finding-card">
+      <span class="finding-num">1</span>
+      <div class="finding-text"><strong>DNSSEC 活跃</strong> — 大量 DNSKEY 查询（10.8%）表明 DNSSEC 验证正在运行</div>
+    </div>
+    <div class="finding-card">
+      <span class="finding-num">2</span>
+      <div class="finding-text"><strong>双域名托管</strong> — 同时管理 alicetec.cn 和 wallnut.top 两个域名</div>
+    </div>
+    <div class="finding-card">
+      <span class="finding-num">3</span>
+      <div class="finding-text"><strong>IPv6 支持良好</strong> — 22.4% 的查询为 AAAA 类型</div>
+    </div>
+    <div class="finding-card">
+      <span class="finding-num">4</span>
+      <div class="finding-text"><strong>NXDOMAIN 问题</strong> — halo.alicetec.cn、safe.alicetec.cn、music.alicetec.cn 等子域名被访问但 DNS 记录不存在</div>
+    </div>
+    <div class="finding-card">
+      <span class="finding-num">5</span>
+      <div class="finding-text"><strong>Cloudflare Worker 使用中</strong> — 发现 workers.dev 子域名</div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>数据来源：Cloudflare DNS Analytics API<span class="sep">｜</span>报告生成时间：2026-07-07<span class="sep">｜</span>数据范围：2026-07-01 ~ 2026-07-07</p>
+</div>
+
+</div>
+</body>
+</html>
