@@ -13,7 +13,7 @@
 
 - Typora 导出 HTML（Pixyll 主题）作为内容页面基底
 - GitHub Actions 自动部署（push to main → gh-pages）
-- 原生 Canvas 动画（首页银色金属丝波动、关于页樱花飘落与波浪）
+- 首页银色金属丝波动动画、关于页樱花飘落与波浪动画
 - GitHub REST API 客户端数据获取（关于页统计数据）
 
 ## 当前内容
@@ -41,7 +41,7 @@
 | 页面 | 文件 | 说明 |
 |------|------|------|
 | 首页入口 | `index.html` | 项目介绍页，链接到内容列表、公考知识库、Alicetec 官网等 |
-| 内容列表 | `list.html` | 主页，明日方舟风格深色主题 + 银色金属丝 Canvas 动画 |
+| 内容列表 | `list.html` | 主页，深色主题 + 银色金属丝动画 |
 | 关于 | `html/about.html` | 个人介绍，深色主题 + 樱花飘落 + 银色波浪动画 + GitHub 统计 |
 | 复习资料 | `html/dasan/*.html` `html/daer/*.html` | 各科目复习材料，Typora 导出 HTML |
 | 公考知识库 | `html/gksz/GK索引.html` | 公考资料索引页 + 热点夜话系列文章（Test阶段） |
